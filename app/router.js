@@ -6,6 +6,9 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('administration', function() {
+    this.route('units');
+  });
 });
 
 export default Router;
