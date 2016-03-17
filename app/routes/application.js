@@ -7,7 +7,7 @@ export default Ember.Route.extend({
   password: '',
 
   model: function () {
-    return this.store.findAll('announcement');
+    return this.get("session.currentUser.company");
   },
   beforeModel: function() {
     return this.get("session").fetch().catch(function() {});
@@ -20,9 +20,11 @@ export default Ember.Route.extend({
         password: password
       }).then(function(data) {
         console.log(data.currentUser);
+        this.transitionTo('administration');
       });
     },
     signOut: function() {
+      this.store.unloadAll();
       this.get("session").close();
     },
     createUser: function(email, password,nome, company) {

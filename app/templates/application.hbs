@@ -21,7 +21,9 @@
       <ul class="nav navbar-nav">
         <li><a href="#">Insumos</a></li>
         <li><a href="#">Composicoes</a></li>
-        <li><a href="#">Projetos</a></li>
+        {{#link-to 'projects' tagName="li" href=false}}
+            <a href="#">Projetos</a>
+        {{/link-to}}
         {{#link-to 'administration' tagName="li" href=false}}
             <a href="#">Administracao</a>
         {{/link-to}}

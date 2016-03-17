@@ -1,11 +1,9 @@
 <div class="row">
   <div class="col-md-2">
-    <ul class="nav nav-pills nav-stacked">
-      <li role="presentation"><a href="#">Usuarios</a></li>
-      {{#link-to 'administration.units' tagName="li" href=false role="presentation"}}
-          <a href="#">Unidades</a>
-      {{/link-to}}
-    </ul>
+    <div class="list-group">
+      {{#link-to 'administration.units' class="list-group-item"}}Unidades{{/link-to}}
+      {{#link-to 'administration.stages' class="list-group-item"}}Etapas{{/link-to}}
+    </div>
   </div>
   <div class="col-md-10">
     {{outlet}}

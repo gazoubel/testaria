@@ -2,32 +2,29 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   name: '',
-  acronym: '',
 
   actions: {
-      addUnit: function (name, acronym){
+      addStage: function (name, acronym){
         var controller = this.get('controller');
 
         var company = this.get("currentModel");
 
-        var unit = this.store.createRecord('unit', {
+        var stage = this.store.createRecord('stage', {
           name: name,
-          acronym: acronym
         });
 
-        company.get('units').addObject(unit);
+        company.get('stages').addObject(stage);
 
-        unit.save().then(function() {
+        stage.save().then(function() {
           return company.save().then(function(){
             controller.set('name', '');
-            controller.set('acronym', '');
           });
         }).catch(function(reason){
           this.set('mostrarErro', true);
         });
       },
-      removeUnit: function (unit){
-        unit.destroyRecord();
+      removeStage: function (stage){
+        stage.destroyRecord();
       }
     }
 });

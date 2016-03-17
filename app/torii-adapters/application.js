@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ToriiFirebaseAdapter from 'emberfire/torii-adapters/firebase';
+import config from '../config/environment';
 export default ToriiFirebaseAdapter.extend({
   firebase: Ember.inject.service(),
 
@@ -11,10 +12,18 @@ export default ToriiFirebaseAdapter.extend({
           endAt: authentication.uid
       }).then(function(user){
         if (user) {
+          // if (baseRef) {
+          //   currentUser = baseRef.get('currentUser');
+          //   if (currentUser && currentUser.company) {
+          //     return '/'+currentUser.company.id;
+          //   }
+          // }
+          var loggedUser = user.get('firstObject');
+          // config.firebase = config.firebase + '/companies/' + loggedUser.get('company.id');
           resolve({
             provider: authentication.provider,
             uid: authentication.uid,
-            currentUser: user.get('firstObject')
+            currentUser: loggedUser
           });
         }
       });

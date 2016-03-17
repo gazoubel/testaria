@@ -8,6 +8,14 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('administration', function() {
     this.route('units');
+    this.route('stages');
+  });
+  this.route('projects', function() {
+    this.route('new');
+
+    this.route('project', {
+      path: ':id'
+    });
   });
 });
 

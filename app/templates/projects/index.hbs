@@ -1,0 +1,19 @@
+<h1>Projetos</h1>
+{{#link-to "projects.new"}}<button class="btn btn-default">Novo Projeto</button>{{/link-to}}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Local</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.projects as |project|}}
+    <tr>
+      <td>{{project.name}}</td>
+      <td>{{project.location}}</td>
+      <td>{{#link-to "projects.project" project}}<button class="btn btn-default">editar</button>{{/link-to}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
