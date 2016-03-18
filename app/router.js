@@ -15,6 +15,10 @@ Router.map(function() {
 
     this.route('project', {
       path: ':id'
+    }, function() {
+      this.route('etapas', function() {
+        this.route('new');
+      });
     });
   });
 });

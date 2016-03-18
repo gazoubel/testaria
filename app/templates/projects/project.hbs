@@ -1,3 +1,13 @@
 <h1>Projeto: {{model.name}}</h1>
-<h3>Local: {{model.location}}</h3>
+{{!-- <h3>Local: {{model.location}}</h3> --}}
+<ul class="nav nav-tabs">
+  {{#link-to "projects.project.index" tagName="li"}}
+  <a href={{view.href}}>Informacoes Gerais</a>
+  {{/link-to}}
+  {{#link-to "projects.project.etapas" tagName="li"}}
+  <a href={{view.href}}>Etapas</a>
+  {{/link-to}}
+</ul>
+<div class="tab-content">
 {{outlet}}
+</div>

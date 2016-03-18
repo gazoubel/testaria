@@ -1,0 +1,22 @@
+{{#link-to "projects.project.etapas.new"}}<button class="btn btn-default">Nova Etapa</button>{{/link-to}}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Data Inicio</th>
+      <th>Data Fim</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.projectStages as |projectStage|}}
+    <tr>
+      <td>{{projectStage.name}}</td>
+      <td>{{projectStage.startDate}}</td>
+      <td>{{projectStage.EndDate}}</td>
+      <td>{{projectStage.total}}</td>
+      {{!-- <td>{{#link-to "projects.project" project}}<button class="btn btn-default">editar</button>{{/link-to}}</td> --}}
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
