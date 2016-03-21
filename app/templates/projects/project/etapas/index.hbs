@@ -12,10 +12,11 @@
     {{#each model.projectStages as |projectStage|}}
     <tr>
       <td>{{projectStage.name}}</td>
-      <td>{{projectStage.startDate}}</td>
-      <td>{{projectStage.EndDate}}</td>
+      <td>{{projectStage.startdate}}</td>
+      <td>{{projectStage.enddate}}</td>
       <td>{{projectStage.total}}</td>
-      {{!-- <td>{{#link-to "projects.project" project}}<button class="btn btn-default">editar</button>{{/link-to}}</td> --}}
+      <button class="btn btn-default" {{action "remove" projectStage}}>remover</button>
+      <td>{{#link-to "projects.project.etapas.etapa.edit" projectStage}}<button class="btn btn-default">editar</button>{{/link-to}}</td>
     </tr>
     {{/each}}
   </tbody>

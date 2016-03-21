@@ -1,21 +1,15 @@
 <h1>Nova Etapa</h1>
-<form  role="form" {{action "add" model.projectStage on="submit"}}> <!-- horizontal form -->
-    <div class="form-group">
-      <label for="nameInput">Nome</label>
-      {{input value=model.projectStage.name class="form-control" id="nameInput" }}
+{{form-etapa onSave='save' projectStage = model.projectStage project = model.project}}
+{{!-- <form  class="form-horizotal" role="form" {{action "add" model.projectStage on="submit"}}> <!-- horizontal form -->
+  {{mab-input-label field = model.projectStage.name displayText="Nome" size="12"}}
+  {{mab-input-date-label field = model.projectStage.startdate displayText="Data Inicio" size="4"}}
+  {{mab-input-date-label field = model.projectStage.enddate displayText="Data Termino" size="4"}}
+  {{mab-input-label field = model.projectStage.total displayText="Total" size="4"}}
+    <br/>
+  <div class="form-group">
+    <div class="pull-right" style="margin-top: 20px;">
+      {{#link-to "projects.project.etapas"}}<button class="btn btn-default">Cancelar</button>{{/link-to}}
+      <button type="submit" class="btn btn-default">Adicionar</button>
     </div>
-    <div class="form-group">
-      <label for="nameTotal">Total</label>
-      {{input value=model.projectStage.total class="form-control" id="nameTotal" }}
-    </div>
-    <div class="form-group">
-      <label for="nameStartDate">Start Date</label>
-      {{input value=model.projectStage.startDate class="form-control" id="nameStartDate" }}
-    </div>
-    <div class="form-group">
-      <label for="nameEndDate">End Date</label>
-      {{input value=model.projectStage.endDate class="form-control" id="nameEndDate" }}
-    </div>
-    <button type="submit" class="btn btn-default">Adicionar</button>
-    {{#link-to "projects.project.etapas"}}<button class="btn btn-default">Cancelar</button>{{/link-to}}
-</form>
+  </div>
+</form> --}}

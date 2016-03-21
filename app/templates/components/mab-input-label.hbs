@@ -1,0 +1,68 @@
+{{#if first}}
+  <div class="ax-clear"></div>
+  <div class="ax-v-space-10"></div>
+{{/if}}
+
+{{#if isInlineText }}
+  <label class="col-sm-{{inlineLabelSize}} control-label">{{displayText}}</label>
+
+  <div class="col-sm-{{size}} {{cssClassFirst}} {{cssClassLast}}">
+
+    {{#if isMultiline }}
+
+      {{textarea id        = idInputElement
+                 class     = cssClass
+                 value     = field
+                 disabled  = isDisabled
+                 autofocus = autofocus
+                 maxlength = maxlength}}
+
+    {{else}}
+
+      {{mab-input id        = idInputElement
+                  type      = "text"
+                  value     = field
+                  class     = cssClass
+                  disabled  = isDisabled
+                  autofocus = autofocus
+                  numeric   = numeric
+                  scale     = scale
+                  onChange  = (action "onChange")
+                  maxlength = maxlength}}
+
+    {{/if}}
+
+  </div>
+
+{{else}}
+  <div class="col-sm-{{size}} {{cssClassFirst}} {{cssClassLast}}">
+
+    <label>{{displayText}}</label>
+
+    {{#if isMultiline }}
+
+      {{textarea id        = idInputElement
+                 class     = cssClass
+                 value     = field
+                 disabled  = isDisabled
+                 autofocus = autofocus
+                 maxlength = maxlength}}
+
+    {{else}}
+
+      {{mab-input id        = idInputElement
+                  type      = "text"
+                  value     = field
+                  class     = cssClass
+                  disabled  = isDisabled
+                  autofocus = autofocus
+                  numeric   = numeric
+                  scale     = scale
+                  onChange  = (action "onChange")
+                  maxlength = maxlength}}
+
+    {{/if}}
+
+  </div>
+
+{{/if}}

@@ -14,10 +14,16 @@ Router.map(function() {
     this.route('new');
 
     this.route('project', {
-      path: ':id'
+      path: ':project_id'
     }, function() {
       this.route('etapas', function() {
         this.route('new');
+
+        this.route('etapa', {
+          path: ':project_stage_id'
+        }, function() {
+          this.route('edit');
+        });
       });
     });
   });

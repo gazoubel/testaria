@@ -14,13 +14,14 @@ export default Ember.Route.extend({
   },
   actions: {
     doSignIn: function(email, password) {
+      var baseRef = this;
       this.get('session').open('firebase', {
         provider: 'password',
         email: email,
         password: password
       }).then(function(data) {
         console.log(data.currentUser);
-        this.transitionTo('administration');
+        baseRef.transitionTo('projects');
       });
     },
     signOut: function() {
