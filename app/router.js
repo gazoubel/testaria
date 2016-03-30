@@ -25,6 +25,21 @@ Router.map(function() {
           this.route('edit');
         });
       });
+      this.route('execution', function() {
+        this.route('new');
+
+        this.route('stage', {
+          path: ':project_stage_id'
+        }, function() {
+          this.route('expenses', function() {
+            this.route('expense', {
+              path: ':expense_id'
+            }, function() {
+              this.route('edit');
+            });
+          });
+        });
+      });
     });
   });
 });

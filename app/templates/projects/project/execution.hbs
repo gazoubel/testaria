@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-2">
+    <div class="list-group">
+      {{#each model.project.projectStages as |projectStage|}}
+      {{!-- <div class="list-group-item"><button class="btn btn-default" {{action "selectStage" projectStage}}>{{projectStage.name}}</button></div> --}}
+      {{!-- <li class="list-group-item" {{action "selectStage" projectStage}}>{{projectStage.name}}</li> --}}
+      {{#link-to 'projects.project.execution.stage.expenses' projectStage.id class="list-group-item"}}{{projectStage.name}}{{/link-to}}
+      {{/each}}
+      {{!-- projectStages --}}
+      {{!-- {{#link-to 'administration.units' class="list-group-item"}}Unidades{{/link-to}}
+      {{#link-to 'administration.stages' class="list-group-item"}}Etapas{{/link-to}} --}}
+    </div>
+  </div>
+   <div class="col-md-10">
+     {{outlet}}
+    {{!--<form class="form-inline pull-right" role="form" {{action "add" model.newItem on="submit"}}> <!-- horizontal form -->
+        <div class="form-group">
+          <label for="totalInput">Total</label>
+          {{mab-input value=model.newItem.total class="form-control" id="totalInput" }}
+        </div>
+        <div class="form-group">
+          <label for="descriptionInput">Descricao</label>
+          {{mab-input value=model.newItem.description class="form-control" id="descriptionInput" }}
+        </div>
+        <button type="submit" class="btn btn-default">Adicionar</button>
+    </form>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Descricao</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each model.selectedProjectStage.expenseItems as |stage|}}
+        <tr>
+          <td>{{stage.description}}</td>
+          <td>{{stage.total}}</td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>--}}
+  </div>
+</div>

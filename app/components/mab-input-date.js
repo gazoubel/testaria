@@ -90,7 +90,8 @@ export default Datepicker.extend({
       return this.createNewDate(str.substring(0,2), str.substring(2,4), str.substring(4));
     }
     else {
-      return null;
+      // return null;
+      return this.createNewDate(str);
     }
 
   },

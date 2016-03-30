@@ -1,0 +1,11 @@
+<form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
+  {{mab-input-label field = item.total displayText="Nome" size="4"}}
+  {{mab-input-label field = item.description displayText="Total" size="8"}}
+    <br/>
+  <div class="form-group">
+    <div class="pull-right" style="margin-top: 20px;">
+      {{#link-to "projects.project.etapas"}}<button class="btn btn-default">Cancelar</button>{{/link-to}}
+      <button type="submit" class="btn btn-default">Adicionar</button>
+    </div>
+  </div>
+</form>
