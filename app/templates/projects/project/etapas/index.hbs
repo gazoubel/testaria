@@ -5,7 +5,8 @@
       <th>Nome</th>
       <th>Data Inicio</th>
       <th>Data Fim</th>
-      <th>Total</th>
+      <th>Total Orcado</th>
+      <th>Total Gasto</th>
     </tr>
   </thead>
   <tbody>
@@ -15,6 +16,7 @@
       <td>{{projectStage.startdate}}</td>
       <td>{{projectStage.enddate}}</td>
       <td>{{projectStage.total}}</td>
+      <td>{{projectStage.totalExpense}}</td>
       <td><button class="btn btn-default" {{action "remove" projectStage}}>remover</button>
       {{#link-to "projects.project.etapas.etapa.edit" projectStage}}
         <button class="btn btn-default">editar</button>

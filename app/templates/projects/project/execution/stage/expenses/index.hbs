@@ -6,7 +6,7 @@
     </div>
     <div class="form-group">
       <label for="totalInput">Total</label>
-      {{mab-input value=model.newItem.total class="form-control" id="totalInput" }}
+      {{mab-input value=model.newItem.total class="form-control" id="totalInput" numeric="true" }}
     </div>
     <button type="submit" class="btn btn-default">Adicionar</button>
   </form>
@@ -17,6 +17,12 @@
         <th>Total</th>
       </tr>
     </thead>
+    <tfoot>
+      <tr>
+        <td>Total</td>
+        <td>{{model.projectStage.totalExpense}}</td>
+      </tr>
+    </tfoot>
     <tbody>
       {{#each model.projectStage.expenseItems as |item|}}
       <tr>
