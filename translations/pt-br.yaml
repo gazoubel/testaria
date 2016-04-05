@@ -1,0 +1,13 @@
+product:
+  menu:
+    basic: 'Insumos'
+    composition: 'Composto'
+    projects: 'Projetos'
+    administration: 'Administracao'
+    search: 'Procurar'
+  administration:
+    units: 'Unidades'
+    stages: 'Etapas'
+  title: 'Ola mundo!'
+  html:
+    info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'

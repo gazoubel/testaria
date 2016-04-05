@@ -12,7 +12,8 @@ export default Ember.Route.extend({
   beforeModel: function() {
     return Ember.RSVP.hash({
       session: this.get("session").fetch().catch(function() {}),
-      intl: this.get('intl').setLocale('en-us'),
+      // intl: this.get('intl').setLocale('en-us'),
+      intl: this.get('intl').setLocale('pt-BR'),
     });
     // return this.get("session").fetch().catch(function() {});
   },

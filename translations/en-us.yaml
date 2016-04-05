@@ -1,4 +1,13 @@
 product:
+  menu:
+    basic: 'Items'
+    composition: 'Compositions'
+    projects: 'Projects'
+    administration: 'Administration'
+    search: 'Search'
+  administration:
+    units: 'Units'
+    stages: 'Stages'
   info: '{product} will cost {price, number, USD} if ordered by {deadline, date, time}'
   title: 'Hello world!'
   html:
