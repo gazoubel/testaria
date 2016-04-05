@@ -2,7 +2,7 @@ import Ember from 'ember';
 import Firebase from 'firebase';
 
 export default Ember.Route.extend({
-
+  intl: Ember.inject.service(),
   email: '',
   password: '',
 
@@ -10,7 +10,11 @@ export default Ember.Route.extend({
     return this.get("session.currentUser.company");
   },
   beforeModel: function() {
-    return this.get("session").fetch().catch(function() {});
+    return Ember.RSVP.hash({
+      session: this.get("session").fetch().catch(function() {}),
+      intl: this.get('intl').setLocale('en-us'),
+    });
+    // return this.get("session").fetch().catch(function() {});
   },
   actions: {
     doSignIn: function(email, password) {

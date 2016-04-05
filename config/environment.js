@@ -16,7 +16,9 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
+    intl: {
+      baseLocale: 'en-us' // default build-time locale
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
