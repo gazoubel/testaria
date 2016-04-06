@@ -13,10 +13,10 @@
     {{#each model.projectStages as |projectStage|}}
     <tr>
       <td>{{projectStage.name}}</td>
-      <td>{{projectStage.startdate}}</td>
-      <td>{{projectStage.enddate}}</td>
-      <td>{{projectStage.total}}</td>
-      <td>{{projectStage.totalExpense}}</td>
+      <td>{{format-date projectStage.startdate localeMatcher='best fit'}}</td>
+      <td>{{format-date projectStage.enddate localeMatcher='best fit'}}</td>
+      <td>{{format-number projectStage.total style='currency' currency='BRL' fallback='nothing'}}</td>
+      <td>{{format-number projectStage.totalExpense style='currency' currency='BRL' fallback='nothing'}}</td>
       <td><button class="btn btn-default" {{action "remove" projectStage}}>remover</button>
       {{#link-to "projects.project.etapas.etapa.edit" projectStage}}
         <button class="btn btn-default">editar</button>

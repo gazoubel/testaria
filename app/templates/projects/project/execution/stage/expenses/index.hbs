@@ -20,14 +20,14 @@
     <tfoot>
       <tr>
         <td>Total</td>
-        <td>{{model.projectStage.totalExpense}}</td>
+        <td>{{format-number model.projectStage.totalExpense style='currency' currency='BRL' fallback='nothing'}}</td>
       </tr>
     </tfoot>
     <tbody>
       {{#each model.projectStage.expenseItems as |item|}}
       <tr>
         <td>{{item.description}}</td>
-        <td>{{item.total}}</td>
+        <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
         <td>
           <button class="btn btn-default" {{action "remove" item}}>remover</button>
           {{#link-to "projects.project.execution.stage.expenses.expense.edit" item.id}}<button class="btn btn-default">editar</button>{{/link-to}}
