@@ -1,10 +1,10 @@
-<h1>Projetos</h1>
-{{#link-to "projects.new"}}<button class="btn btn-default">Novo Projeto</button>{{/link-to}}
+<h1>{{t 'product.projects.title'}}</h1>
+{{#link-to "projects.new"}}<button class="btn btn-default">{{t 'product.projects.newProject'}}</button>{{/link-to}}
 <table class="table table-striped">
   <thead>
     <tr>
-      <th>Nome</th>
-      <th>Local</th>
+      <th>{{t 'product.basic.commonWords.name'}}</th>
+      <th>{{t 'product.basic.commonWords.location'}}</th>
     </tr>
   </thead>
   <tbody>
@@ -12,7 +12,7 @@
     <tr>
       <td>{{project.name}}</td>
       <td>{{project.location}}</td>
-      <td>{{#link-to "projects.project" project}}<button class="btn btn-default">editar</button>{{/link-to}}</td>
+      <td>{{#link-to "projects.project" project}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}</td>
     </tr>
     {{/each}}
   </tbody>

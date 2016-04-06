@@ -5,9 +5,44 @@ product:
     projects: 'Projetos'
     administration: 'Administracao'
     search: 'Procurar'
+    signOut: 'Sair'
+    loggedInText: 'Logado como'
   administration:
-    units: 'Unidades'
-    stages: 'Etapas'
-  title: 'Ola mundo!'
+    menu:
+      units: 'Unidades'
+      stages: 'Etapas'
+    stages:
+      title: 'Etapas'
+    units:
+      title: 'Unidades'
+  projects:
+    title: 'Projetos'
+    newProject: 'Novo Projeto'
+    menu:
+      generalInformation: 'Informacoes Gerais'
+      stages: 'Etapas'
+      execution: 'Execucao'
+  basic:
+    buttonText:
+      add: 'Adicionar'
+      delete: 'Remover'
+      edit: 'Alterar'
+      cancel: 'Cancelar'
+      save: 'Save'
+    commonWords:
+      name: 'Nome'
+      description: 'Descricao'
+      acronym: 'Sigla'
+      units: 'Unidades'
+      stages: 'Etapas'
+      location: 'Local'
+      total: 'Total'
+      project: 'Projeto'
+      initialDate: 'Data Inicio'
+      endDate: 'Data Fim'
+      totalBudgeted: 'Total Orcado'
+      totalSpent: 'Total Gasto'
+      newStage: 'Nova Etapa'
+      editStage: 'Alterar Etapa'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'
