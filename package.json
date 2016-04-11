@@ -38,6 +38,7 @@
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
     "ember-intl": "2.9.0",
+    "ember-power-select": "0.9.2",
     "emberfire": "1.6.4",
     "torii": "0.6.1"
   }

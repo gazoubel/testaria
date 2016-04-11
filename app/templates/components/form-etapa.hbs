@@ -1,4 +1,11 @@
 <form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
+  {{#power-select options=project.company.stages
+    selected=projectStage.stage
+    onchange=(action (mut projectStage.stage))
+    placeholder="Select..."
+    as |stage|}}
+     {{stage.name}}
+   {{/power-select}}
   {{mab-input-label field = projectStage.name displayText="Nome" size="12"}}
   {{mab-input-date-label field = projectStage.startdate displayText="Data Inicio" size="4"}}
   {{mab-input-date-label field = projectStage.enddate displayText="Data Termino" size="4"}}
