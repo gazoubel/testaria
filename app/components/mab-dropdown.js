@@ -7,9 +7,4 @@ export default EmberPowerSelect.extend({
   placeholder: Ember.computed(function() {
     return this.get('intl').t('product.basic.commonWords.select');
   })
-  // intl: Ember.inject.service(),
-  // placeholder: Ember.computed('intl.locale', function() {
-  //   return this.get('intl').t('product.basic.commonWords.select');
-  // })
-  // placeholder: this.get('intl').formatMessage('product.basic.commonWords.select')
 });

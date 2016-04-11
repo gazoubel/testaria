@@ -1,0 +1,35 @@
+{{!-- {{#if first}}
+  <div class="ax-clear"></div>
+  <div class="ax-v-space-10"></div>
+{{/if}} --}}
+
+{{#if isInlineText }}
+
+  <label class="col-sm-{{inlineLabelSize}} control-label">{{displayText}}</label>
+
+  <div class="col-sm-{{size}}">
+    {{#mab-dropdown
+      options=options
+      selected=selected
+      onchange=(action (mut selected))
+      as |item|}}
+       {{yield item}}
+     {{/mab-dropdown}}
+  </div>
+
+{{else}}
+
+  <div class="col-sm-{{size}}">
+
+    <label>{{displayText}}</label>
+
+    {{#mab-dropdown
+      options=options
+      selected=selected
+      onchange=(action (mut selected))
+      as |item|}}
+       {{yield item}}
+     {{/mab-dropdown}}
+  </div>
+
+{{/if}}
