@@ -28,13 +28,14 @@ product:
       delete: 'Remover'
       edit: 'Alterar'
       cancel: 'Cancelar'
-      save: 'Save'
+      save: 'Salvar'
     commonWords:
       name: 'Nome'
       description: 'Descricao'
       acronym: 'Sigla'
       units: 'Unidades'
       stages: 'Etapas'
+      stage: 'Etapa'
       location: 'Local'
       total: 'Total'
       project: 'Projeto'
@@ -44,5 +45,6 @@ product:
       totalSpent: 'Total Gasto'
       newStage: 'Nova Etapa'
       editStage: 'Alterar Etapa'
+      select: 'Selecione...'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'
