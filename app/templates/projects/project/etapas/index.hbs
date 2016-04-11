@@ -17,11 +17,14 @@
       <td>{{format-date projectStage.enddate localeMatcher='best fit'}}</td>
       <td>{{format-number projectStage.total style='currency' currency='BRL' fallback='nothing'}}</td>
       <td>{{format-number projectStage.totalExpense style='currency' currency='BRL' fallback='nothing'}}</td>
-      <td><button class="btn btn-default" {{action "remove" projectStage}}>{{t 'product.basic.buttonText.delete'}}</button>
-      {{#link-to "projects.project.etapas.etapa.edit" projectStage}}
-        <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>
-      {{/link-to}}</td>
-    </tr>
-    {{/each}}
-  </tbody>
-</table>
+      <td>
+        {{#unless projectStage.totalExpense}}
+          <button class="btn btn-default" {{action "remove" projectStage}}>{{t 'product.basic.buttonText.delete'}}</button>
+        {{/unless}}
+        {{#link-to "projects.project.etapas.etapa.edit" projectStage}}
+          <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>
+        {{/link-to}}</td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
