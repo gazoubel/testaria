@@ -5,8 +5,10 @@ export default Ember.Route.extend({
   intl: Ember.inject.service(),
   email: '',
   password: '',
+  notifications: null,
 
   model: function () {
+    // this.notifications.setDefaultClearNotification(1200);
     return this.get("session.currentUser.company");
   },
   beforeModel: function() {
@@ -26,6 +28,7 @@ export default Ember.Route.extend({
         password: password
       }).then(function(data) {
         console.log(data.currentUser);
+        baseRef.notifications.error('test')
         baseRef.transitionTo('projects');
       });
     },

@@ -10,6 +10,12 @@ export default Ember.Route.extend({
   },
   actions: {
       save(projectStage){
+        this.notifications.success('Saved successfully!', {
+          autoClear: true
+        });
+
+        // this.notifications.success('saved');
+        // notify('info', 'test');
         this.transitionTo('projects.project.etapas');
         // var ref = this;
         // var controller = this.get('controller');

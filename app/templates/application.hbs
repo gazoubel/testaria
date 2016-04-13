@@ -1,4 +1,5 @@
 {{!-- <h2 id="title">Welcome to Ember</h2> --}}
+{{notification-container notifications=notifications autoClear="true"}}
 {{#if session.isAuthenticated}}
 {{!-- Logged in as {{session.currentUser.name}} ({{session.currentUser.role}})
 <button {{action "signOut"}}>Sign out</button> --}}
