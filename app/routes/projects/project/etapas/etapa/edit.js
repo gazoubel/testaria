@@ -1,6 +1,8 @@
 import Ember from 'ember';
+var inject = Ember.inject;
 
 export default Ember.Route.extend({
+  appManager: inject.service(),
   model: function (params) {
     return Ember.RSVP.hash({
       project: this.modelFor("projects.project"),
@@ -10,9 +12,11 @@ export default Ember.Route.extend({
   },
   actions: {
       save(projectStage){
-        this.notifications.success('Saved successfully!', {
-          autoClear: true
-        });
+        this.get('appManager').notify('success', 'Saved successfully!');
+
+        // this.notifications.success('Saved successfully!', {
+        //   autoClear: true
+        // });
 
         // this.notifications.success('saved');
         // notify('info', 'test');

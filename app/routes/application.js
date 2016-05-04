@@ -28,7 +28,6 @@ export default Ember.Route.extend({
         password: password
       }).then(function(data) {
         console.log(data.currentUser);
-        baseRef.notifications.error('test')
         baseRef.transitionTo('projects');
       });
     },
