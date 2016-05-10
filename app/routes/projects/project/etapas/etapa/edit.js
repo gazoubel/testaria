@@ -1,8 +1,8 @@
 import Ember from 'ember';
-var inject = Ember.inject;
+// var inject = Ember.inject;
 
 export default Ember.Route.extend({
-  appManager: inject.service(),
+  // appManager: inject.service(),
   model: function (params) {
     return Ember.RSVP.hash({
       project: this.modelFor("projects.project"),
