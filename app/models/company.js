@@ -5,5 +5,6 @@ export default DS.Model.extend({
   users: DS.hasMany('user',   {async: true}),
   units: DS.hasMany('unit',   {async: true}),
   stages: DS.hasMany('stage',   {async: true}),
-  projects: DS.hasMany('project',   {async: true})
+  projects: DS.hasMany('project',   {async: true}),
+  companyToUserAccess: DS.hasMany('company-to-user',   {async: true}),
 });
