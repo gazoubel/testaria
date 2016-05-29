@@ -7,6 +7,7 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       project: this.modelFor("projects.project"),
       projectStage: this.modelFor("projects.project.etapas.etapa"),
+      stages: this.store.findAll('stage')
       // projectStage:  this.store.find('projectStage', params.project_stage_id)
     });
   },

@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   projectStage: {},
   project: {},
+  stages: {},
   actions: {
     save(projectStage, project){
       var ref = this;

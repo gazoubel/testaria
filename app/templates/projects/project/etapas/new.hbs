@@ -1,15 +1,2 @@
 <h1>{{t 'product.basic.commonWords.newStage'}}</h1>
-{{form-etapa onSave='save' projectStage = model.projectStage project = model.project}}
-{{!-- <form  class="form-horizotal" role="form" {{action "add" model.projectStage on="submit"}}> <!-- horizontal form -->
-  {{mab-input-label field = model.projectStage.name displayText="Nome" size="12"}}
-  {{mab-input-date-label field = model.projectStage.startdate displayText="Data Inicio" size="4"}}
-  {{mab-input-date-label field = model.projectStage.enddate displayText="Data Termino" size="4"}}
-  {{mab-input-label field = model.projectStage.total displayText="Total" size="4"}}
-    <br/>
-  <div class="form-group">
-    <div class="pull-right" style="margin-top: 20px;">
-      {{#link-to "projects.project.etapas"}}<button class="btn btn-default">Cancelar</button>{{/link-to}}
-      <button type="submit" class="btn btn-default">Adicionar</button>
-    </div>
-  </div>
-</form> --}}
+{{form-etapa onSave='save' projectStage = model.projectStage project = model.project stages=model.stages}}

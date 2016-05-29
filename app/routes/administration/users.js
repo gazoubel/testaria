@@ -3,9 +3,12 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   name: '',
   email: '',
+  model: function () {
+    return this.store.findAll('company-to-user');
+  },
 
   actions: {
-      addUser: function (company, name, email){
+      addUser: function (name, email){
         var baseRef = this;
         var ref = new Firebase("https://blazing-inferno-2549.firebaseio.com/");
         // var company = model;
@@ -33,16 +36,16 @@ export default Ember.Route.extend({
               promises.then(function (resolved) {
                 var newMembership = baseRef.store.createRecord('company-to-user', {
                   user: resolved.user,
-                  company: company,
+                  // company: company,
                   role: "admin"
                 });
 
                 newMembership.save().then(function(membership) {
                   resolved.user.get('companyToUserAccess').addObject(membership);
-                  company.get('companyToUserAccess').addObject(membership);
+                  // company.get('companyToUserAccess').addObject(membership);
                   var membershipPromises = Ember.RSVP.hash({
                     user: resolved.user.save(),
-                    company: company.save()
+                    // company: company.save()
                   });
 
                   membershipPromises.catch(function() {

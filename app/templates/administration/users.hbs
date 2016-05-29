@@ -1,5 +1,5 @@
 <h1>{{t 'product.administration.users.title'}}</h1>
-<form class="form-inline pull-right" role="form" {{action "addUser" model name email on="submit"}}> <!-- horizontal form -->
+<form class="form-inline pull-right" role="form" {{action "addUser" name email on="submit"}}> <!-- horizontal form -->
     <div class="form-group">
       <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
       {{input value=name class="form-control" id="nameInput" }}
@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model.companyToUserAccess as |companyToUser|}}
+    {{#each model as |companyToUser|}}
     <tr>
       <td>{{companyToUser.user.name}}</td>
       <td>{{companyToUser.user.email}}</td>

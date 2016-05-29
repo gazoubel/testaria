@@ -1,6 +1,6 @@
 <form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
   {{#mab-dropdown-label
-    options=project.company.stages
+    options=stages
     selected=projectStage.stage
     displayText=(t 'product.basic.commonWords.stage')
     size="4" as |item|}}

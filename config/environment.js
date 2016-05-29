@@ -4,7 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'testaria',
     environment: environment,
-    firebase: 'https://blazing-inferno-2549.firebaseio.com/',
+    // firebase: 'https://blazing-inferno-2549.firebaseio.com/',
+    firebase: '',
     torii: {
       sessionServiceName: 'session'
     },

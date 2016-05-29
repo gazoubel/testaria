@@ -4,7 +4,8 @@ export default Ember.Route.extend({
   model: function () {
     return Ember.RSVP.hash({
       project: this.modelFor("projects.project"),
-      projectStage: this.store.createRecord('project-stage')
+      projectStage: this.store.createRecord('project-stage'),
+      stages: this.store.findAll('stage')
     });
   },
   actions: {
