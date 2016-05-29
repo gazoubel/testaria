@@ -11,10 +11,13 @@ product:
     menu:
       units: 'Unidades'
       stages: 'Etapas'
+      users: 'Usuarios'
     stages:
       title: 'Etapas'
     units:
       title: 'Unidades'
+    users:
+      title: 'Usuarios'
   projects:
     title: 'Projetos'
     newProject: 'Novo Projeto'
@@ -46,5 +49,7 @@ product:
       newStage: 'Nova Etapa'
       editStage: 'Alterar Etapa'
       select: 'Selecione...'
+      email: 'email'
+      role: 'Provilegio'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'

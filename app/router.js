@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('administration', function() {
     this.route('units');
     this.route('stages');
+    this.route('users');
   });
   this.route('projects', function() {
     this.route('new');

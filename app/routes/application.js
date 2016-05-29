@@ -47,14 +47,9 @@ export default Ember.Route.extend({
           console.log("Error creating user:", error);
         } else {
           console.log("Successfully created user account with uid:", userData.uid);
-          // baseRef.get('session').open('firebase', {
-          //   provider: 'password',
-          //   email: email,
-          //   password: password
-          // }).then(function(data) {
-            // console.log(data.currentUser);
             var newUser = baseRef.store.createRecord('user', {
               name: nome,
+              email: email,
               uid: userData.uid
             });
             var newCompany = baseRef.store.createRecord('company', {
@@ -78,9 +73,6 @@ export default Ember.Route.extend({
               newMembership.save().then(function(membership) {
                 resolved.user.get('companyToUserAccess').addObject(membership);
                 resolved.company.get('companyToUserAccess').addObject(membership);
-                //resolved.user.companyToUserAccess.addObject(membership);
-                //resolved.company.companyToUserAccess.addObject(membership);
-
                 var membershipPromises = Ember.RSVP.hash({
                   user: resolved.user.save(),
                   company: resolved.company.save()
