@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['form-group'],
 
-  options: null,
-  selected: null,
+  options: {},
+  selected: {},
   displayText: '',
   isDisabled: false,
   isInlineText: false,

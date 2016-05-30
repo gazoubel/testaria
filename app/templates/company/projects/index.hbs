@@ -1,0 +1,19 @@
+<h1>{{t 'product.projects.title'}}</h1>
+{{#link-to "company.projects.new"}}<button class="btn btn-default">{{t 'product.projects.newProject'}}</button>{{/link-to}}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{t 'product.basic.commonWords.name'}}</th>
+      <th>{{t 'product.basic.commonWords.location'}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |project|}}
+    <tr>
+      <td>{{project.name}}</td>
+      <td>{{project.location}}</td>
+      <td>{{#link-to "company.projects.project" project}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

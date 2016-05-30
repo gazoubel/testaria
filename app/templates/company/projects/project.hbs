@@ -1,0 +1,16 @@
+<h1>{{t 'product.basic.commonWords.project'}}: {{model.name}}</h1>
+{{!-- <h3>Local: {{model.location}}</h3> --}}
+<ul class="nav nav-tabs">
+  {{#link-to "company.projects.project.index" tagName="li"}}
+  <a href={{view.href}}>{{t 'product.projects.menu.generalInformation'}}</a>
+  {{/link-to}}
+  {{#link-to "company.projects.project.etapas" tagName="li"}}
+  <a href={{view.href}}>{{t 'product.projects.menu.stages'}}</a>
+  {{/link-to}}
+  {{#link-to "company.projects.project.execution" tagName="li"}}
+  <a href={{view.href}}>{{t 'product.projects.menu.execution'}}</a>
+  {{/link-to}}
+</ul>
+<div class="tab-content">
+{{outlet}}
+</div>

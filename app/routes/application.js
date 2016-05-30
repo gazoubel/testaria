@@ -37,7 +37,7 @@ export default Ember.Route.extend({
             password: password
           }).then(function(data) {
             console.log(data.currentUser);
-            baseRef.transitionTo('projects');
+            baseRef.transitionTo('company.projects');
           });
         } else {
           console.log("no url found");
