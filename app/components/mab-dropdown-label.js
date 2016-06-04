@@ -15,5 +15,8 @@ export default Ember.Component.extend({
   inlineLabelSize: Ember.computed('isInlineText','size', function() {
     return 12-this.get('size');
   }),
+  didInitAttrs(){
+    this._super(...arguments);
+  }
 
 });

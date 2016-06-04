@@ -6,7 +6,7 @@ export default DS.Model.extend({
   startdate: DS.attr('date'),
   enddate: DS.attr('date'),
   project: DS.belongsTo('project',   {async: true}),
-  stage: DS.belongsTo('stage',   {async: true}),
+  stage: DS.belongsTo('stage',   {async: true, inverse: null}),
   expenseItems: DS.hasMany('expense-item',   {async: true}),
   totalExpense: (function() {
     var expenseItems = this.get('expenseItems');

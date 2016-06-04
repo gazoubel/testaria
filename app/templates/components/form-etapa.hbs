@@ -1,19 +1,11 @@
 <form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
-  <!-- {{#mab-dropdown-label
+  {{#mab-dropdown-label
     options=stages
-    selected=projectStage.stage
+    selected=selectedStage
     displayText=(t 'product.basic.commonWords.stage')
     size="4" as |item|}}
     {{item.name}}
-  {{/mab-dropdown-label}} -->
-
-  {{#power-select
-    options=stages
-    selected=projectStage.stage
-    onchange=(action (mut projectStage.stage))
-    as |item|}}
-     {{item.name}}
-   {{/power-select}}
+  {{/mab-dropdown-label}}
 
   {{mab-input-label field = projectStage.name displayText=(t 'product.basic.commonWords.name') size="12"}}
   {{mab-input-date-label field = projectStage.startdate displayText=(t 'product.basic.commonWords.initialDate') size="4"}}
