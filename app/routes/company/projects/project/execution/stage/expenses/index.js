@@ -14,6 +14,8 @@ actions: {
     var expenseItem = this.store.createRecord('expense-item');
     expenseItem.set('total', newItem.total);
     expenseItem.set('description', newItem.description);
+    expenseItem.set('dateAdded', new Date());
+
     // this.set('currentModel.newItem',{total:'', description:''});
     var projectStage = this.get("currentModel.projectStage");
     projectStage.get('expenseItems').addObject(expenseItem);

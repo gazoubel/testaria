@@ -8,6 +8,10 @@
       <label for="locationInput">Local</label>
       {{input value=model.project.location class="form-control" id="locationInput" }}
     </div>
+    <div class="form-group">
+      <label for="totalInput">Total</label>
+      {{input value=model.project.total class="form-control" id="totalInput" }}
+    </div>
     <button type="submit" class="btn btn-default">Adicionar</button>
     {{#link-to "company.projects"}}<button class="btn btn-default">Cancelar</button>{{/link-to}}
 </form>
