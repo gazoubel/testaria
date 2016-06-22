@@ -1,0 +1,24 @@
+<div class="col-md-10">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>{{t 'product.basic.commonWords.description'}}</th>
+        <th>{{t 'product.basic.commonWords.total'}}</th>
+        <th>{{t 'product.basic.commonWords.stage'}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each model.project.expenseItems as |item|}}
+      <tr>
+        <td>{{item.description}}</td>
+        <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
+        <td>{{item.stage.name}}</td>
+        <!-- <td>
+          <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
+          {{#link-to "company.projects.project.execution.stage.expenses.expense.edit" item.id}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}
+        </td> -->
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

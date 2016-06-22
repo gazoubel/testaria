@@ -18,9 +18,20 @@ actions: {
 
     // this.set('currentModel.newItem',{total:'', description:''});
     var projectStage = this.get("currentModel.projectStage");
+    var project = projectStage.get("project");
+    expenseItem.set('project', projectStage.get('project'));
     projectStage.get('expenseItems').addObject(expenseItem);
+    project.get('expenseItems').addObject(expenseItem);
     expenseItem.save().then(function() {
-      return projectStage.save().then(function(){
+      var promisses = Ember.RSVP.hash({
+        projectStage: projectStage.save(),
+        project: project.save()
+      });
+      promisses.catch(function() {
+        console.log("could not create", userData.uid);
+      });
+
+      return promisses.then(function(){
         baseRef.set('currentModel.newItem',{total:'', description:''});
       });
     }).catch(function(reason){
