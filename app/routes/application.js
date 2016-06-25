@@ -22,34 +22,34 @@ export default Ember.Route.extend({
     // return this.get("session").fetch().catch(function() {});
   },
   actions: {
-    doSignIn: function(email, password) {
-      var initalRef = new Firebase("https://testariarouter.firebaseio.com/A/url");
-      var url = null;
-      var baseRef = this;
-      initalRef.on("value", function(snapshot) {
-        console.log(snapshot.val());
-        url = snapshot.val();
-        if (url) {
-          config.firebase = url;
-          baseRef.get('session').open('firebase', {
-            provider: 'password',
-            email: email,
-            password: password
-          }).then(function(data) {
-            console.log(data.currentUser);
-            baseRef.transitionTo('company.projects');
-          });
-        } else {
-          console.log("no url found");
-        }
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
-      });
-    },
-    signOut: function() {
-      this.store.unloadAll();
-      this.get("session").close();
-    },
+    // doSignIn: function(email, password) {
+    //   var initalRef = new Firebase("https://testariarouter.firebaseio.com/A/url");
+    //   var url = null;
+    //   var baseRef = this;
+    //   initalRef.on("value", function(snapshot) {
+    //     console.log(snapshot.val());
+    //     url = snapshot.val();
+    //     if (url) {
+    //       config.firebase = url;
+    //       baseRef.get('session').open('firebase', {
+    //         provider: 'password',
+    //         email: email,
+    //         password: password
+    //       }).then(function(data) {
+    //         console.log(data.currentUser);
+    //         baseRef.transitionTo('company.projects');
+    //       });
+    //     } else {
+    //       console.log("no url found");
+    //     }
+    //   }, function (errorObject) {
+    //     console.log("The read failed: " + errorObject.code);
+    //   });
+    // },
+    // signOut: function() {
+    //   this.store.unloadAll();
+    //   this.get("session").close();
+    // },
     createUser: function(email, password,nome, company) {
       var initalRef = new Firebase("https://testariarouter.firebaseio.com/A/url");
       var url = null;

@@ -12,8 +12,8 @@ export default Ember.Route.extend({
       .then(function(snapshot){
         var value = snapshot.val();
         if (value) {
-        config.firebase = value.url;
-        return snapshot;
+          config.firebase = value.url;
+          return value;
         }
       }, function(error){
         return null;
