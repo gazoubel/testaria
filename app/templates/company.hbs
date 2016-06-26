@@ -53,7 +53,7 @@
   <div class="row">
     <div class="Absolute-Center is-Responsive">
       <div class="panel panel-default">
-        <div class="panel-heading">{{model.companyName}}</div>
+        <div class="panel-heading">{{model.baseInfo.val().companyName}}</div>
         <div class="panel-body">
           <form {{action "doSignIn" email password on="submit"}}>
             <label for="email">Email</label>

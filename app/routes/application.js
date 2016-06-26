@@ -9,104 +9,88 @@ export default Ember.Route.extend({
   notifications: null,
 
   model: function () {
-    // this.notifications.setDefaultClearNotification(1200);
-    // return this.get("session.currentUser.company");
-    return this.get("session.membership.company");
+    // var config = {
+    //   apiKey: "AIzaSyD0ERhTCIIjH3vkc0ztpHHPOb74HSG7uww",
+    //   authDomain: "azoba-router.firebaseapp.com",
+    //   databaseURL: "https://azoba-router.firebaseio.com",
+    //   storageBucket: "azoba-router.appspot.com",
+    // };
+    // var routerApp = firebase.initializeApp(config, "router");
+    // var initalRef = routerApp.database().ref("A").once('value')
+    //   .then(function(snapshot){
+    //     var value = snapshot.val();
+    //     if (value) {
+    //       config.firebase = value.config;
+    //       return value.config;
+    //     }
+    //   }, function(error){
+    //     return null;
+    //   });
+    // return Ember.RSVP.hash({
+    //   routerApp: routerApp,
+    //   companyApp: initalRef,
+    // });
   },
   beforeModel: function() {
     return Ember.RSVP.hash({
       session: this.get("session").fetch().catch(function() {}),
-      // intl: this.get('intl').setLocale('en-us'),
       intl: this.get('intl').setLocale('pt-BR'),
     });
-    // return this.get("session").fetch().catch(function() {});
   },
   actions: {
-    // doSignIn: function(email, password) {
-    //   var initalRef = new Firebase("https://testariarouter.firebaseio.com/A/url");
-    //   var url = null;
-    //   var baseRef = this;
-    //   initalRef.on("value", function(snapshot) {
-    //     console.log(snapshot.val());
-    //     url = snapshot.val();
-    //     if (url) {
-    //       config.firebase = url;
-    //       baseRef.get('session').open('firebase', {
-    //         provider: 'password',
-    //         email: email,
-    //         password: password
-    //       }).then(function(data) {
-    //         console.log(data.currentUser);
-    //         baseRef.transitionTo('company.projects');
-    //       });
-    //     } else {
-    //       console.log("no url found");
-    //     }
-    //   }, function (errorObject) {
-    //     console.log("The read failed: " + errorObject.code);
-    //   });
-    // },
-    // signOut: function() {
-    //   this.store.unloadAll();
-    //   this.get("session").close();
-    // },
     createUser: function(email, password,nome, company) {
-      var initalRef = new Firebase("https://testariarouter.firebaseio.com/A/url");
+      var companyAppConfig = this.get("currentModel.companyApp");
+      config.firebase = companyAppConfig;
+      var companyApp = firebase.initializeApp(companyAppConfig);
       var url = null;
       var baseRef = this;
-      initalRef.on("value", function(snapshot) {
-        url = snapshot.val();
-        if (url) {
-          config.firebase = url;
-          var ref = new Firebase(url);
-          ref.createUser({
-            email    : email,
-            password : password
-          }, function(error, userData) {
-            if (error) {
-              console.log("Error creating user:", error);
-            } else {
-              console.log("Successfully created user account with uid:", userData.uid);
-                var newUser = baseRef.store.createRecord('user', {
-                  name: nome,
-                  email: email,
-                  uid: userData.uid
-                });
-                var newCompany = baseRef.store.createRecord('company', {
-                  name: company
-                });
-                var promises = Ember.RSVP.hash({
-                  user: newUser.save(),
-                  // company: newCompany.save()
-                });
-                promises.catch(function() {
-                  console.log("could not create", userData.uid);
-                });
-                promises.then(function (resolved) {
-                  // baseRef.set('session.currentUser', resolved.user);
-                  var newMembership = baseRef.store.createRecord('company-to-user', {
-                    user: resolved.user,
-                    // company: resolved.company,
-                    role: "admin"
-                  });
 
-                  newMembership.save().then(function(membership) {
-                    resolved.user.get('companyToUserAccess').addObject(membership);
-                    // resolved.company.get('companyToUserAccess').addObject(membership);
-                    var membershipPromises = Ember.RSVP.hash({
-                      user: resolved.user.save(),
-                      // company: resolved.company.save()
-                    });
-                  });
-                });
-            }
-          });
-        } else {
-          console.log("no url found");
-        }
-      }, function (errorObject) {
-        console.log("The read failed: " + errorObject.code);
+      var ref = companyApp.database().ref();
+      var userCreationPromisse = companyApp.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        console.log("Error creating user:", errorCode +" / "+errorMessage);
       });
+      var userAuthenticated = userCreationPromisse.then(function(userData){
+        return baseRef.get('session').open('firebase', {
+          provider: 'password',
+          email: email,
+          password: password
+        });
+      });
+      userAuthenticated.then(function(userData){
+          console.log("Successfully created user account with uid:", userData.uid);
+            var newUser = baseRef.store.createRecord('user', {
+              name: nome,
+              email: email,
+              uid: userData.uid
+            });
+            var newCompany = baseRef.store.createRecord('company', {
+              name: company
+            });
+            var promises = Ember.RSVP.hash({
+              user: newUser.save(),
+              // company: newCompany.save()
+            });
+            promises.catch(function() {
+              console.log("could not create", userData.uid);
+            });
+            promises.then(function (resolved) {
+              var newMembership = baseRef.store.createRecord('company-to-user', {
+                user: resolved.user,
+                role: "admin"
+              });
+
+              newMembership.save().then(function(membership) {
+                resolved.user.get('companyToUserAccess').addObject(membership);
+                var membershipPromises = Ember.RSVP.hash({
+                  user: resolved.user.save(),
+                });
+              });
+            });
+      });
+
 
 
 

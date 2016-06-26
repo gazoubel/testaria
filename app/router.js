@@ -13,6 +13,7 @@ Router.map(function() {
       this.route('units');
       this.route('stages');
       this.route('users');
+      this.route('item-types');
     });
     this.route('projects', function() {
       this.route('new');

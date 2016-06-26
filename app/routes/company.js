@@ -8,17 +8,32 @@ export default Ember.Route.extend({
   password: '',
 
   model: function (params) {
-    var initalRef = new Firebase("https://testariarouter.firebaseio.com/"+params.company_name).once('value')
+    var routerFirebaseConfig = {
+      apiKey: "AIzaSyD0ERhTCIIjH3vkc0ztpHHPOb74HSG7uww",
+      authDomain: "azoba-router.firebaseapp.com",
+      databaseURL: "https://azoba-router.firebaseio.com",
+      storageBucket: "azoba-router.appspot.com",
+    };
+    var routerApp = firebase.initializeApp(routerFirebaseConfig, "router");
+    var initalRef = routerApp.database().ref(params.company_name).once('value')
       .then(function(snapshot){
         var value = snapshot.val();
         if (value) {
-          config.firebase = value.url;
+          config.firebase = value.config;
+          value.id = snapshot.key;
           return value;
+          // return value;
         }
       }, function(error){
         return null;
       });
-    return initalRef;
+    // return initalRef;
+    return Ember.RSVP.hash({
+      baseInfo: initalRef,
+      // routerApp: routerApp,
+      // intl: this.get('intl').setLocale('en-us'),
+      // companyApp: initalRef,
+    });
   },
   beforeModel: function() {
     return Ember.RSVP.hash({
@@ -30,6 +45,9 @@ export default Ember.Route.extend({
   actions: {
     doSignIn: function(email, password) {
       var baseRef = this;
+      // var companyAppConfig = this.get("currentModel.companyApp");
+      // config.firebase = companyAppConfig;
+
       if (config.firebase) {
         baseRef.get('session').open('firebase', {
           provider: 'password',
@@ -37,17 +55,18 @@ export default Ember.Route.extend({
           password: password
         }).then(function(data) {
           console.log(data.currentUser);
-          baseRef.transitionTo('company.projects');
+          // baseRef.transitionTo('company.projects');
         });
       } else {
         console.log("no url found");
       }
     },
     signOut: function() {
+      var companyName = this.get('currentModel.baseInfo').id;
       this.store.unloadAll();
       this.get("session").close();
       // config.firebase = '';
-      this.transitionTo('company', this.get('currentModel').name());
+      this.transitionTo('company', companyName);
     },
   }
 });
