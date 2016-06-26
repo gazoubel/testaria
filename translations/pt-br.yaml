@@ -12,10 +12,13 @@ product:
       units: 'Unidades'
       stages: 'Etapas'
       users: 'Usuarios'
+      itemTypes: 'Classificacao de Itens'
     stages:
       title: 'Etapas'
     units:
       title: 'Unidades'
+    itemTypes:
+      title: 'Classificacao de Itens'
     users:
       title: 'Usuarios'
   projects:

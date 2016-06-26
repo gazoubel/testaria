@@ -5,5 +5,6 @@ export default DS.Model.extend({
   description: DS.attr('string'),
   stage: DS.belongsTo('project-stage',   {async: true}),
   project: DS.belongsTo('project',   {async: true}),
+  itemType: DS.belongsTo('item-type',   {async: true}),
   dateAdded: DS.attr('date'),
 });
