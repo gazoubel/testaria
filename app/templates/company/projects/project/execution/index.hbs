@@ -1,35 +1,45 @@
-<div class="col-md-10">
-  <form class="form-inline pull-right" role="form" {{action "add" model.newItem on="submit"}}> <!-- horizontal form -->
-    <div class="form-group">
-      <label for="descriptionInput">{{t 'product.basic.commonWords.description'}}</label>
-      {{mab-input value=model.newItem.description class="form-control" id="descriptionInput" }}
-    </div>
-    <div class="form-group">
-      <label for="totalInput">{{t 'product.basic.commonWords.total'}}</label>
-      {{mab-input value=model.newItem.total class="form-control" id="totalInput" numeric="true" }}
-    </div>
-    <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
-  </form>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>{{t 'product.basic.commonWords.description'}}</th>
-        <th>{{t 'product.basic.commonWords.total'}}</th>
-        <th>{{t 'product.basic.commonWords.stage'}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each model.project.expenseItems as |item|}}
-      <tr>
-        <td>{{item.description}}</td>
-        <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
-        <td>{{if item.stage item.stage.name 'n/a'}}</td>
-        <!-- <td>
-          <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
-          {{#link-to "company.projects.project.execution.stage.expenses.expense.edit" item.id}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}
-        </td> -->
-      </tr>
-      {{/each}}
-    </tbody>
-  </table>
-</div>
+<form class="form-inline pull-right" role="form" {{action "add" model.newItem on="submit"}}> <!-- horizontal form -->
+  <div class="form-group">
+    {{#mab-dropdown
+      options=model.itemTypes
+      selected=model.newItem.itemType
+      onchange=(action (mut model.newItem.itemType))
+      placeholder = (t 'product.projects.execution.dropdownPlaceholder')
+      as |item|}}
+       {{item.name}}
+     {{/mab-dropdown}}
+  </div>
+  <div class="form-group">
+    <!-- <label for="descriptionInput">{{t 'product.basic.commonWords.description'}}</label> -->
+    {{mab-input value=model.newItem.description class="form-control" id="descriptionInput" placeholder=(t 'product.basic.commonWords.description') }}
+  </div>
+  <div class="form-group">
+    <!-- <label for="totalInput">{{t 'product.basic.commonWords.total'}}</label> -->
+    {{mab-input value=model.newItem.total class="form-control" id="totalInput" numeric="true" placeholder=(t 'product.basic.commonWords.total')}}
+  </div>
+  <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{t 'product.basic.commonWords.description'}}</th>
+      <th>{{t 'product.basic.commonWords.total'}}</th>
+      <th>{{t 'product.basic.commonWords.stage'}}</th>
+      <th>{{t 'product.basic.commonWords.itemType'}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.project.expenseItems as |item|}}
+    <tr>
+      <td>{{item.description}}</td>
+      <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
+      <td>{{if item.stage item.stage.name 'N/A'}}</td>
+      <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
+      <!-- <td>
+        <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
+        {{#link-to "company.projects.project.execution.stage.expenses.expense.edit" item.id}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}
+      </td> -->
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

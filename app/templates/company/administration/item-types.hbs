@@ -1,0 +1,23 @@
+<h1>{{t 'product.administration.itemTypes.title'}}</h1>
+<form class="form-inline pull-right" role="form" {{action "addItemType" name on="submit"}}> <!-- horizontal form -->
+    <div class="form-group">
+      <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
+      {{input value=name class="form-control" id="nameInput" }}
+    </div>
+    <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{t 'product.basic.commonWords.name'}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |itemType|}}
+    <tr>
+      <td>{{itemType.name}}</td>
+      <td>{{#unless itemType.expenseItems}}<button type="submit" class="btn btn-default" {{action "removeItemType" itemType}}>{{t 'product.basic.buttonText.delete'}}</button>{{/unless}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>

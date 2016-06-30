@@ -10,5 +10,6 @@ export default EmberPowerSelect.extend({
   }),
   didInitAttrs(){
     this._super(...arguments);
-  }
+  },
+  matchTriggerWidth: false
 });

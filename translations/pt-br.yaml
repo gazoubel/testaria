@@ -28,6 +28,8 @@ product:
       generalInformation: 'Informacoes Gerais'
       stages: 'Etapas'
       execution: 'Execucao'
+    execution:
+      dropdownPlaceholder: 'Tipo'
   basic:
     buttonText:
       add: 'Adicionar'
@@ -53,6 +55,7 @@ product:
       editStage: 'Alterar Etapa'
       select: 'Selecione...'
       email: 'email'
-      role: 'Provilegio'
+      role: 'Privilegio'
+      itemType: 'Tipo'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'

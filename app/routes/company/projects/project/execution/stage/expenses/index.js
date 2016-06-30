@@ -5,7 +5,8 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
       newItem: {total:'', description:''},
       // project: this.modelFor("projects.project"),
-      projectStage: this.modelFor("company.projects.project.execution.stage")
+      projectStage: this.modelFor("company.projects.project.execution.stage"),
+      itemTypes: this.store.findAll('item-type'),
     });
 },
 actions: {
@@ -15,6 +16,7 @@ actions: {
     expenseItem.set('total', newItem.total);
     expenseItem.set('description', newItem.description);
     expenseItem.set('dateAdded', new Date());
+    expenseItem.set('itemType', newItem.itemType);
 
     // this.set('currentModel.newItem',{total:'', description:''});
     var projectStage = this.get("currentModel.projectStage");
@@ -22,10 +24,12 @@ actions: {
     expenseItem.set('project', projectStage.get('project'));
     projectStage.get('expenseItems').addObject(expenseItem);
     project.get('expenseItems').addObject(expenseItem);
+    newItem.itemType.get('expenseItems').addObject(expenseItem);
     expenseItem.save().then(function() {
       var promisses = Ember.RSVP.hash({
         projectStage: projectStage.save(),
-        project: project.save()
+        project: project.save(),
+        itemType: newItem.itemType.save()
       });
       promisses.catch(function() {
         console.log("could not create", userData.uid);
