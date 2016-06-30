@@ -14,19 +14,22 @@ export default Ember.Route.extend({
     add(newItem){
       var baseRef = this;
       var expenseItem = this.store.createRecord('expense-item');
+      var purchaseTransaction = this.store.createRecord('purchase-transaction');
       expenseItem.set('total', newItem.total);
       expenseItem.set('description', newItem.description);
       expenseItem.set('itemType', newItem.itemType);
       expenseItem.set('dateAdded', new Date());
+      expenseItem.set('purchaseTransaction', purchaseTransaction);
+      purchaseTransaction.set('expenseItems', [expenseItem]);
 
-      // this.set('currentModel.newItem',{total:'', description:''});
       var project = this.get("currentModel.project");
-      expenseItem.set('project', project);
-      project.get('expenseItems').addObject(expenseItem);
+      purchaseTransaction.set('project', project);
+      project.get('purchaseTransactions').addObject(purchaseTransaction);
       newItem.itemType.get('expenseItems').addObject(expenseItem);
       expenseItem.save().then(function() {
         var promisses = Ember.RSVP.hash({
           project: project.save(),
+          purchaseTransaction: purchaseTransaction.save(),
           itemType: newItem.itemType.save()
         });
         promisses.catch(function() {

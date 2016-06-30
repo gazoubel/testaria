@@ -7,11 +7,15 @@ export default DS.Model.extend({
   enddate: DS.attr('date'),
   project: DS.belongsTo('project',   {async: true}),
   stage: DS.belongsTo('stage',   {async: true, inverse: null}),
-  expenseItems: DS.hasMany('expense-item',   {async: true}),
+  // expenseItems: DS.hasMany('expense-item',   {async: true}),
+  purchaseTransactions: DS.hasMany('purchase-transaction',   {async: true}),
   totalExpense: (function() {
-    var expenseItems = this.get('expenseItems');
+    var expenseItems = this.get('purchaseTransactions.@each.expenseItems');
+    if (!expenseItems) {
+      return 0;
+    }
     return expenseItems.reduce(function(prev, item) {
       return (prev || 0) + Number(item.get('total'));
     });
-  }).property('expenseItems.@each.total')
+  }).property('purchaseTransactions.@each.expenseItems.@each.total')
 });

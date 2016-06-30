@@ -29,17 +29,19 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model.project.expenseItems as |item|}}
-    <tr>
-      <td>{{item.description}}</td>
-      <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
-      <td>{{if item.stage item.stage.name 'N/A'}}</td>
-      <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
-      <!-- <td>
-        <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
-        {{#link-to "company.projects.project.execution.stage.expenses.expense.edit" item.id}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}
-      </td> -->
-    </tr>
+    {{#each model.project.purchaseTransactions as |purchaseTransaction|}}
+      {{#each purchaseTransaction.expenseItems as |item|}}
+      <tr>
+        <td>{{item.description}}</td>
+        <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
+        <td>{{if item.stage item.stage.name 'N/A'}}</td>
+        <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
+        <!-- <td>
+          <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
+          {{#link-to "company.projects.project.execution.stage.expenses.expense.edit" item.id}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}
+        </td> -->
+      </tr>
+      {{/each}}
     {{/each}}
   </tbody>
 </table>
