@@ -34,7 +34,7 @@
       <tr>
         <td>{{item.description}}</td>
         <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
-        <td>{{if item.stage item.stage.name 'N/A'}}</td>
+        <td>{{if purchaseTransaction.projectStage purchaseTransaction.projectStage.name 'N/A'}}</td>
         <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
         <!-- <td>
           <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
