@@ -22,6 +22,10 @@ export default Ember.Route.extend({
         }).catch(function(reason){
           // this.set('mostrarErro', true);
         });
+      },
+      cancel: function (project){
+        project.destroyRecord();
+        this.transitionTo('company.projects');
       }
     }
 });

@@ -57,5 +57,7 @@ product:
       email: 'email'
       role: 'Privilegio'
       itemType: 'Tipo'
+      address: 'Endereco'
+      totalWithProfit: 'Total com lucro'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'
