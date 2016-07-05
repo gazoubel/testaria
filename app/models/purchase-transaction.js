@@ -13,6 +13,22 @@ export default DS.Model.extend({
     return expenseItems.reduce(function(prev, item) {
       return (prev || 0) + Number(item.get('total'));
     });
+  }),
+  projectStageAssigned: Ember.computed('projectStage', function() {
+    var projectStage = this.get('projectStage.id');
+    if (projectStage) {
+      return true;
+    } else {
+      return false;
+    }
+    // 
+    // return this.get('projectStage').then(function(projectStage){
+    //   if (projectStage.get('id')) {
+    //     return true;
+    //   } else {
+    //     return false;
+    //   }
+    // });
   })
   // totalExpense: (function() {
   //   var expenseItems = this.get('expenseItems');
@@ -22,6 +38,6 @@ export default DS.Model.extend({
   //   return expenseItems.reduce(function(prev, item) {
   //     return (prev || 0) + Number(item.get('total'));
   //   });
-  // }).property('expenseItems.@each.total') 
+  // }).property('expenseItems.@each.total')
 
 });

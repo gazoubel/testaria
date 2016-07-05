@@ -29,7 +29,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model.project.purchaseTransactions as |purchaseTransaction|}}
+    {{#each model.purchaseTransactions as |purchaseTransaction|}}
       {{#each purchaseTransaction.expenseItems as |item|}}
       <tr>
         <td>{{item.description}}</td>
