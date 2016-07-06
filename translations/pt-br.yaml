@@ -11,10 +11,16 @@ product:
     menu:
       units: 'Unidades'
       stages: 'Etapas'
+      users: 'Usuarios'
+      itemTypes: 'Classificacao de Itens'
     stages:
       title: 'Etapas'
     units:
       title: 'Unidades'
+    itemTypes:
+      title: 'Classificacao de Itens'
+    users:
+      title: 'Usuarios'
   projects:
     title: 'Projetos'
     newProject: 'Novo Projeto'
@@ -22,6 +28,8 @@ product:
       generalInformation: 'Informacoes Gerais'
       stages: 'Etapas'
       execution: 'Execucao'
+    execution:
+      dropdownPlaceholder: 'Tipo'
   basic:
     buttonText:
       add: 'Adicionar'
@@ -46,5 +54,10 @@ product:
       newStage: 'Nova Etapa'
       editStage: 'Alterar Etapa'
       select: 'Selecione...'
+      email: 'email'
+      role: 'Privilegio'
+      itemType: 'Tipo'
+      address: 'Endereco'
+      totalWithProfit: 'Total com lucro'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'

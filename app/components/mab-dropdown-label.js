@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['form-group'],
 
-  options: null,
-  selected: null,
+  options: {},
+  selected: {},
   displayText: '',
   isDisabled: false,
   isInlineText: false,
@@ -15,5 +15,8 @@ export default Ember.Component.extend({
   inlineLabelSize: Ember.computed('isInlineText','size', function() {
     return 12-this.get('size');
   }),
+  didInitAttrs(){
+    this._super(...arguments);
+  }
 
 });

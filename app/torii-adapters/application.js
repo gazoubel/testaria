@@ -19,11 +19,13 @@ export default ToriiFirebaseAdapter.extend({
           //   }
           // }
           var loggedUser = user.get('firstObject');
+          var loggedUserMembership = loggedUser?loggedUser.get('companyToUserAccess').get('firstObject'):null;
           // config.firebase = config.firebase + '/companies/' + loggedUser.get('company.id');
           resolve({
             provider: authentication.provider,
             uid: authentication.uid,
-            currentUser: loggedUser
+            // currentUser: loggedUser,
+            membership: loggedUserMembership
           });
         }
       });

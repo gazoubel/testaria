@@ -1,0 +1,31 @@
+<h1>{{t 'product.administration.users.title'}}</h1>
+<form class="form-inline pull-right" role="form" {{action "addUser" name email on="submit"}}> <!-- horizontal form -->
+    <div class="form-group">
+      <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
+      {{input value=name class="form-control" id="nameInput" }}
+    </div>
+    <div class="form-group">
+      <label for="acronymInput">{{t 'product.basic.commonWords.email'}}</label>
+      {{input value=email class="form-control" id="emailInput" }}
+    </div>
+    <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{t 'product.basic.commonWords.name'}}</th>
+      <th>{{t 'product.basic.commonWords.email'}}</th>
+      <th>{{t 'product.basic.commonWords.role'}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |companyToUser|}}
+    <tr>
+      <td>{{companyToUser.user.name}}</td>
+      <td>{{companyToUser.user.email}}</td>
+      <td>{{companyToUser.role}}</td>
+      <td><button type="submit" class="btn btn-default" {{action "removeLink" unit}}>{{t 'product.basic.buttonText.delete'}}</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
