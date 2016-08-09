@@ -29,12 +29,13 @@
     </tr>
   </thead>
   <tbody>
-    {{#each model.purchaseTransactions as |purchaseTransaction|}}
-      {{#each purchaseTransaction.expenseItems as |item|}}
+    <!-- {{#each model.purchaseTransactions as |purchaseTransaction|}}
+    {{/each}} -->
+      {{#each model.expenseItems as |item|}}
       <tr>
         <td>{{item.description}}</td>
         <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
-        <td>{{if purchaseTransaction.projectStage purchaseTransaction.projectStage.name 'N/A'}}</td>
+        <td>{{if item.projectStage item.projectStage.name 'N/A'}}</td>
         <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
         <!-- <td>
           <button class="btn btn-default" {{action "remove" item}}>{{t 'product.basic.buttonText.delete'}}</button>
@@ -42,6 +43,5 @@
         </td> -->
       </tr>
       {{/each}}
-    {{/each}}
   </tbody>
 </table>

@@ -7,16 +7,29 @@ export default DS.Model.extend({
   purchaseTransactions: DS.hasMany('purchase-transaction',   {async: true}),
   total: DS.attr('number'),
   totalWithProfit: DS.attr('number'),
-  totalSpent: Ember.computed('purchaseTransactions.@each.totalExpense', 'purchaseTransactions.[]', function() {
-    var pTransactions = this.get('purchaseTransactions');
-    if (!pTransactions) {
+  expenseItems: DS.hasMany('expense-item',   {async: true}),
+  totalSpent: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
+    var expenseItems = this.get('expenseItems');
+    if (!expenseItems) {
       return 0;
     }
-    return pTransactions.reduce(function(prev, item) {
-      return (prev || 0) + Number(item.get('totalExpense'));
+    return expenseItems.reduce(function(prev, item) {
+      return (prev || 0) + Number(item.get('total'));
     });
   }),
-  unassignedPurchaseTransaction: Ember.computed('purchaseTransactions.@each', function(){
-    return this.get('purchaseTransactions').filterBy('projectStageAssigned', false);
+  unassignedPurchaseTransaction: Ember.computed('expenseItems.[]', function(){
+    return this.get('expenseItems').filterBy('projectStageAssigned', false);
   }),
+  // totalSpent: Ember.computed('purchaseTransactions.@each.totalExpense', 'purchaseTransactions.[]', function() {
+  //   var pTransactions = this.get('purchaseTransactions');
+  //   if (!pTransactions) {
+  //     return 0;
+  //   }
+  //   return pTransactions.reduce(function(prev, item) {
+  //     return (prev || 0) + Number(item.get('totalExpense'));
+  //   });
+  // }),
+  // unassignedPurchaseTransaction: Ember.computed('purchaseTransactions.@each', function(){
+  //   return this.get('purchaseTransactions').filterBy('projectStageAssigned', false);
+  // }),
 });

@@ -3,11 +3,13 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   purchaseTransaction: Ember.inject.service('purchase-transaction'),
   model: function (params, transition) {
+    var projectStage = this.modelFor("company.projects.project.execution.stage");
+    var expenseItems = projectStage.get("expenseItems");
     return Ember.RSVP.hash({
       newItem: {total:'', description:''},
-      // project: this.modelFor("projects.project"),
-      projectStage: this.modelFor("company.projects.project.execution.stage"),
+      projectStage: projectStage,
       project: this.modelFor("company.projects.project"),
+      expenseItems: expenseItems,
       itemTypes: this.store.findAll('item-type'),
     });
 },

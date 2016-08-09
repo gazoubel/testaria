@@ -16,12 +16,16 @@ export default Ember.Service.extend({
     purchaseTransaction.set('expenseItems', [expenseItem]);
 
     purchaseTransaction.set('project', project);
+    project.get('purchaseTransactions').addObject(purchaseTransaction);
+    expenseItem.set('project', project);
+    project.get('expenseItems').addObject(expenseItem);
     if (projectStage) {
-      purchaseTransaction.set('projectStage', projectStage);
-      projectStage.get('purchaseTransactions').addObject(purchaseTransaction);
+      expenseItem.set('projectStage', projectStage);
+      // purchaseTransaction.set('projectStage', projectStage);
+      projectStage.get('expenseItems').addObject(expenseItem);
+      // projectStage.get('purchaseTransactions').addObject(purchaseTransaction);
 
     }
-    project.get('purchaseTransactions').addObject(purchaseTransaction);
     newItem.itemType.get('expenseItems').addObject(expenseItem);
     return expenseItem.save().then(function() {
       if (projectStage) {

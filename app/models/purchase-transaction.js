@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   expenseItems: DS.hasMany('expense-item',   {async: true}),
-  projectStage: DS.belongsTo('project-stage',   {async: true}),
+  // projectStage: DS.belongsTo('project-stage',   {async: true}),
   project: DS.belongsTo('project',   {async: true}),
   description: DS.attr('string'),
   totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
@@ -21,7 +21,7 @@ export default DS.Model.extend({
     } else {
       return false;
     }
-    // 
+    //
     // return this.get('projectStage').then(function(projectStage){
     //   if (projectStage.get('id')) {
     //     return true;

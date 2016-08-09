@@ -4,12 +4,16 @@ export default Ember.Route.extend({
   purchaseTransaction: Ember.inject.service('purchase-transaction'),
   model: function (params, transition) {
       var project = this.modelFor("company.projects.project");
-      var purchaseTransactions = project.get("purchaseTransactions").filterBy('projectStageAssigned', false);
+      // var purchaseTransactions = project.get("purchaseTransactions");
+      //.filterBy('projectStageAssigned', false);
+      var expenseItems = project.get("expenseItems").filterBy('projectStageAssigned', false);
+
       return Ember.RSVP.hash({
         newItem: {total:'', description:''},
         project: project,
         itemTypes: this.store.findAll('item-type'),
-        purchaseTransactions: purchaseTransactions
+        // purchaseTransactions: purchaseTransactions,
+        expenseItems: expenseItems
       });
   },
   actions: {

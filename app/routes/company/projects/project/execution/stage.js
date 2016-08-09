@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function (params) {
-    return this.store.find('projectStage', params.project_stage_id);
+    return this.store.find('project-stage', params.project_stage_id);
     // return Ember.RSVP.hash({
     //   newItem: {total:'', description:''},
     //   // project: this.modelFor("projects.project"),
