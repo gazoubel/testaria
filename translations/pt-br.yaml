@@ -28,6 +28,7 @@ product:
       generalInformation: 'Informacoes Gerais'
       stages: 'Etapas'
       execution: 'Execucao'
+      transactions: 'Transacoes'
     execution:
       dropdownPlaceholder: 'Tipo'
   basic:
@@ -59,5 +60,11 @@ product:
       itemType: 'Tipo'
       address: 'Endereco'
       totalWithProfit: 'Total com lucro'
+      numberOfItems: 'Qtd de itens'
+      newTransaction: 'Nova transacao'
+      editTransaction: 'Editar transacao'
+      purchaseDate: 'Data da compra'
+      purchaseItems: 'Items'
+      purchasePaymentInfo: 'Pagamento'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'

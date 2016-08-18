@@ -5,6 +5,33 @@ export default Ember.Service.extend({
   init() {
     this._super(...arguments);
   },
+  addNewItem(newItem, purchaseTransaction){
+    var expenseItem = this.get('store').createRecord('expense-item');
+    // var project = newItem.project;
+    // expenseItem.set('total', newItem.total);
+    // expenseItem.set('description', newItem.description);
+    // expenseItem.set('itemType', newItem.itemType);
+    // expenseItem.set('dateAdded', new Date());
+    // expenseItem.set('purchaseTransaction', purchaseTransaction);
+    // purchaseTransaction.get('expenseItems').addObject(expenseItem);
+    // project.get('expenseItems').addObject(expenseItem);
+    // newItem.itemType.get('expenseItems').addObject(expenseItem);
+    var promise = new Promise(function(resolve, reject) {
+      expenseItem.set('total', newItem.total),
+      expenseItem.set('description', newItem.description),
+      expenseItem.set('itemType', newItem.itemType),
+      expenseItem.set('dateAdded', new Date()),
+      expenseItem.set('purchaseTransaction', purchaseTransaction),
+      purchaseTransaction.get('expenseItems').addObject(expenseItem),
+      newItem.project.get('expenseItems').addObject(expenseItem),
+      newItem.itemType.get('expenseItems').addObject(expenseItem)
+      resolve(newItem);
+
+      // on failure
+      // reject(reason);
+    });
+    return promise;
+  },
   quickAdd(newItem, project, projectStage) {
     var expenseItem = this.get('store').createRecord('expense-item');
     var purchaseTransaction = this.get('store').createRecord('purchase-transaction');
@@ -48,4 +75,22 @@ export default Ember.Service.extend({
       // this.set('mostrarErro', true);
     });
   },
+  rollback(purchaseTransaction){
+    var promise = new Promise(function(resolve, reject) {
+      purchaseTransaction.get('expenseItems').forEach(function(item) {
+        item.get('project').then(function(project){
+          project.rollbackAttributes();
+        });
+        item.get('projectStage').then(function(projectStage){
+          projectStage.rollbackAttributes();
+        });
+        item.rollbackAttributes();
+      });
+      purchaseTransaction.rollbackAttributes();
+      resolve(newItem);
+      // on failure
+      // reject(reason);
+    });
+    return promise;
+  }
 });

@@ -45,6 +45,15 @@ Router.map(function() {
             });
           });
         });
+        this.route('transactions', function() {
+          this.route('new');
+
+          this.route('transaction', {
+            path: ':purchase_transaction_id'
+          }, function() {
+            this.route('edit');
+          });
+        });
       });
     });
   });

@@ -5,6 +5,7 @@ export default DS.Model.extend({
   // projectStage: DS.belongsTo('project-stage',   {async: true}),
   project: DS.belongsTo('project',   {async: true}),
   description: DS.attr('string'),
+  purchaseDate: DS.attr('date'),
   totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');
     if (!expenseItems) {
@@ -21,23 +22,9 @@ export default DS.Model.extend({
     } else {
       return false;
     }
-    //
-    // return this.get('projectStage').then(function(projectStage){
-    //   if (projectStage.get('id')) {
-    //     return true;
-    //   } else {
-    //     return false;
-    //   }
-    // });
+  }),
+  numberOfItems: Ember.computed('expenseItems.[]', function() {
+    return this.get('expenseItems.length');
   })
-  // totalExpense: (function() {
-  //   var expenseItems = this.get('expenseItems');
-  //   if (!expenseItems) {
-  //     return 0;
-  //   }
-  //   return expenseItems.reduce(function(prev, item) {
-  //     return (prev || 0) + Number(item.get('total'));
-  //   });
-  // }).property('expenseItems.@each.total')
 
 });

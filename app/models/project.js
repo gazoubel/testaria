@@ -20,16 +20,14 @@ export default DS.Model.extend({
   unassignedPurchaseTransaction: Ember.computed('expenseItems.[]', function(){
     return this.get('expenseItems').filterBy('projectStageAssigned', false);
   }),
-  // totalSpent: Ember.computed('purchaseTransactions.@each.totalExpense', 'purchaseTransactions.[]', function() {
-  //   var pTransactions = this.get('purchaseTransactions');
-  //   if (!pTransactions) {
-  //     return 0;
-  //   }
-  //   return pTransactions.reduce(function(prev, item) {
-  //     return (prev || 0) + Number(item.get('totalExpense'));
-  //   });
-  // }),
-  // unassignedPurchaseTransaction: Ember.computed('purchaseTransactions.@each', function(){
-  //   return this.get('purchaseTransactions').filterBy('projectStageAssigned', false);
-  // }),
+  uniquePurchaseTransaction: Ember.computed('expenseItems.@each.project', 'expenseItems.[]', function(){
+    var uniqueObjects = [];
+    this.get('expenseItems').forEach(function(item) {
+      var purchaseTransaction = item.get('purchaseTransaction');
+      if (!uniqueObjects.mapBy('id').contains(purchaseTransaction.get('id'))) {
+        uniqueObjects.addObject(purchaseTransaction);
+      }
+    });
+    return uniqueObjects;
+  }),
 });
