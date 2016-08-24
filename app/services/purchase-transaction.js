@@ -21,11 +21,31 @@ export default Ember.Service.extend({
       expenseItem.set('description', newItem.description),
       expenseItem.set('itemType', newItem.itemType),
       expenseItem.set('dateAdded', new Date()),
+      expenseItem.set('project', newItem.project),
+      expenseItem.set('projectStage', newItem.projectStage),
       expenseItem.set('purchaseTransaction', purchaseTransaction),
       purchaseTransaction.get('expenseItems').addObject(expenseItem),
       newItem.project.get('expenseItems').addObject(expenseItem),
       newItem.itemType.get('expenseItems').addObject(expenseItem)
+      newItem.projectStage.get('expenseItems').addObject(expenseItem),
       resolve(newItem);
+
+      // on failure
+      // reject(reason);
+    });
+    return promise;
+  },
+  removeItem(item, purchaseTransaction){
+    var promise = new Promise(function(resolve, reject) {
+      purchaseTransaction.get('expenseItems').removeObject(item);
+      item.get('project').then(function(project){
+        project.get('expenseItems').removeObject(item);
+      });
+      item.get('projectStage').then(function(projectStage){
+        projectStage.get('expenseItems').removeObject(item);
+      });
+      item.destroyRecord();
+      resolve();
 
       // on failure
       // reject(reason);
@@ -75,8 +95,27 @@ export default Ember.Service.extend({
       // this.set('mostrarErro', true);
     });
   },
-  rollback(purchaseTransaction){
+  rollback(purchaseTransaction,itemsRemoved){
     var promise = new Promise(function(resolve, reject) {
+      itemsRemoved.forEach(function(item) {
+        // var project = item.get('project');
+        // if (project) {
+        //   project.rollbackAttributes();
+        // }
+        // var stage = item.get('projectStage');
+        // if (stage) {
+        //   stage.rollbackAttributes();
+        // }
+        item.rollbackAttributes();
+        // item.get('project').then(function(project){
+        //   project.rollbackAttributes();
+        // });
+        // item.get('projectStage').then(function(projectStage){
+        //   projectStage.rollbackAttributes();
+        // });
+        // item.rollbackAttributes();
+      });
+
       purchaseTransaction.get('expenseItems').forEach(function(item) {
         item.get('project').then(function(project){
           project.rollbackAttributes();
@@ -87,7 +126,7 @@ export default Ember.Service.extend({
         item.rollbackAttributes();
       });
       purchaseTransaction.rollbackAttributes();
-      resolve(newItem);
+      resolve(purchaseTransaction);
       // on failure
       // reject(reason);
     });

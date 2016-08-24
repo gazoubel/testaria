@@ -66,5 +66,9 @@ product:
       purchaseDate: 'Data da compra'
       purchaseItems: 'Items'
       purchasePaymentInfo: 'Pagamento'
+      dropdownPlaceholder:
+        tipo: 'Tipo'
+        project: 'Projeto'
+        projectStage: 'Etapa'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'
