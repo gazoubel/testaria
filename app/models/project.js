@@ -20,14 +20,15 @@ export default DS.Model.extend({
   unassignedPurchaseTransaction: Ember.computed('expenseItems.[]', function(){
     return this.get('expenseItems').filterBy('projectStageAssigned', false);
   }),
-  uniquePurchaseTransaction: Ember.computed('expenseItems.@each.project', 'expenseItems.[]', function(){
+  uniquePurchaseTransaction: Ember.computed('expenseItems.@each.{project,purchaseTransaction}', 'expenseItems.[]', function(){
     var uniqueObjects = [];
     this.get('expenseItems').forEach(function(item) {
+      // uniqueObjects.addObject(item.get('purchaseTransaction'));
       var purchaseTransaction = item.get('purchaseTransaction');
       if (!uniqueObjects.mapBy('id').contains(purchaseTransaction.get('id'))) {
         uniqueObjects.addObject(purchaseTransaction);
       }
     });
     return uniqueObjects;
-  }),
+  })
 });

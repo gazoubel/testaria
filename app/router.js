@@ -14,6 +14,13 @@ Router.map(function() {
       this.route('stages');
       this.route('users');
       this.route('item-types');
+      this.route('payment-types', function() {
+        this.route('payment-type', {
+          path: ':payment_type_id'
+        }, function() {
+          this.route('edit');
+        });
+      });
     });
     this.route('projects', function() {
       this.route('new');
@@ -57,6 +64,7 @@ Router.map(function() {
       });
     });
   });
+
 });
 
 export default Router;

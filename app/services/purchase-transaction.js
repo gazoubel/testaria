@@ -17,17 +17,17 @@ export default Ember.Service.extend({
     // project.get('expenseItems').addObject(expenseItem);
     // newItem.itemType.get('expenseItems').addObject(expenseItem);
     var promise = new Promise(function(resolve, reject) {
-      expenseItem.set('total', newItem.total),
-      expenseItem.set('description', newItem.description),
-      expenseItem.set('itemType', newItem.itemType),
-      expenseItem.set('dateAdded', new Date()),
-      expenseItem.set('project', newItem.project),
-      expenseItem.set('projectStage', newItem.projectStage),
-      expenseItem.set('purchaseTransaction', purchaseTransaction),
-      purchaseTransaction.get('expenseItems').addObject(expenseItem),
-      newItem.project.get('expenseItems').addObject(expenseItem),
-      newItem.itemType.get('expenseItems').addObject(expenseItem)
-      newItem.projectStage.get('expenseItems').addObject(expenseItem),
+      expenseItem.set('total', newItem.total);
+      expenseItem.set('description', newItem.description);
+      expenseItem.set('itemType', newItem.itemType);
+      expenseItem.set('dateAdded', new Date());
+      expenseItem.set('project', newItem.project);
+      expenseItem.set('projectStage', newItem.projectStage);
+      expenseItem.set('purchaseTransaction', purchaseTransaction);
+      purchaseTransaction.get('expenseItems').addObject(expenseItem);
+      newItem.project.get('expenseItems').addObject(expenseItem);
+      newItem.itemType.get('expenseItems').addObject(expenseItem);
+      newItem.projectStage.get('expenseItems').addObject(expenseItem);
       resolve(newItem);
 
       // on failure
@@ -42,7 +42,8 @@ export default Ember.Service.extend({
         project.get('expenseItems').removeObject(item);
       });
       item.get('projectStage').then(function(projectStage){
-        projectStage.get('expenseItems').removeObject(item);
+        if(projectStage)
+          projectStage.get('expenseItems').removeObject(item);
       });
       item.destroyRecord();
       resolve();

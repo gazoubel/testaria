@@ -13,6 +13,7 @@ product:
       stages: 'Etapas'
       users: 'Usuarios'
       itemTypes: 'Classificacao de Itens'
+      paymentTypes: 'Formas de Pagamento'
     stages:
       title: 'Etapas'
     units:
@@ -21,6 +22,9 @@ product:
       title: 'Classificacao de Itens'
     users:
       title: 'Usuarios'
+    paymentTypes:
+      title: 'Formas de Pagamento'
+      editTitle: 'Forma de Pagamento'
   projects:
     title: 'Projetos'
     newProject: 'Novo Projeto'
@@ -70,5 +74,6 @@ product:
         tipo: 'Tipo'
         project: 'Projeto'
         projectStage: 'Etapa'
+        paymentType: 'Forma de Pagamento'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'

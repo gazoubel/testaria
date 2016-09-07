@@ -1,0 +1,136 @@
+<form  class="form-horizotal" role="form" {{action "save" purchaseTransaction on="submit"}}> <!-- horizontal form -->
+  <div class="panel-body">
+
+  {{mab-input-label field = purchaseTransaction.description displayText=(t 'product.basic.commonWords.description') size="12"}}
+  {{mab-input-date-label field = purchaseTransaction.purchaseDate displayText=(t 'product.basic.commonWords.purchaseDate') size="4"}}
+</div>
+<section class="panel panel-default">
+	<header class="panel-heading bg-light">
+		<ul class="nav nav-pills nav-justified">
+			<li class="active"><a href="#items" data-toggle="tab">Items</a></li>
+			<li class=""><a href="#payment" data-toggle="tab">Payment</a></li>
+		</ul>
+	</header>
+	<div class="panel-body">
+		<div class="tab-content">
+			<div class="tab-pane active" id="items">
+        <form class="form-inline" role="form">
+          <div class="row">
+          {{#unless project}}
+          <div class="col-xs-12 col-sm-1">
+            <div class="form-group">
+              {{#mab-dropdown
+                options=projects
+                selected=newItem.project
+                onchange=(action (mut newItem.project))
+                placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.project')
+                as |project|}}
+                 {{project.name}}
+               {{/mab-dropdown}}
+             </div>
+            </div>
+          {{/unless}}
+
+          {{#if newItem.project}}
+          <div class="col-xs-12 col-sm-1">
+            <div class="form-group">
+              {{#mab-dropdown
+                options=newItem.project.projectStages
+                selected=newItem.projectStage
+                onchange=(action (mut newItem.projectStage))
+                placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.projectStage')
+                as |projectStage|}}
+                 {{projectStage.name}}
+               {{/mab-dropdown}}
+             </div>
+            </div>
+          {{/if}}
+
+          <div class="col-xs-12 col-sm-1">
+            <div class="form-group">
+                {{#mab-dropdown
+                  options=itemTypes
+                  selected=newItem.itemType
+                  onchange=(action (mut newItem.itemType))
+                  placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.tipo')
+                  as |item|}}
+                   {{item.name}}
+                 {{/mab-dropdown}}
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+                <label class="sr-only" for="descriptionInput">Description</label>
+                {{input value=newItem.description class="form-control" id="descriptionInput" placeholder=(t 'product.basic.commonWords.description') }}
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-3">
+            <div class="form-group">
+              {{mab-input value=newItem.total class="form-control" id="totalInput" numeric="true" placeholder=(t 'product.basic.commonWords.total')}}
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-2">
+            <button class="btn btn-default" {{action "addNewItem" newItem purchaseTransaction}}>{{t 'product.basic.buttonText.add'}}</button>
+          </div>
+          <!-- <div class="form-group">
+            <div class="col-xs-12 col-sm-2">
+            </div>
+          </div> -->
+        </div>
+          <!-- <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button> -->
+        </form>
+
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>{{t 'product.basic.commonWords.description'}}</th>
+              <th>{{t 'product.basic.commonWords.total'}}</th>
+              <th>{{t 'product.basic.commonWords.stage'}}</th>
+              <th>{{t 'product.basic.commonWords.itemType'}}</th>
+            </tr>
+          </thead>
+          <tbody>
+              {{#each purchaseTransaction.expenseItems as |item|}}
+              <tr>
+                <td>{{item.description}}</td>
+                <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
+                <td>{{if item.projectStage item.projectStage.name 'N/A'}}</td>
+                <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
+                <td><button class="btn btn-default" {{action "removeItem" item purchaseTransaction}}>{{t 'product.basic.buttonText.delete'}}</button></td>
+              </tr>
+              {{/each}}
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane" id="payment">
+        <div class="form-group">
+          {{#mab-dropdown
+            options=paymentTypes
+            selected=purchaseTransaction.paymentType
+            onchange=(action "paymentTypeSelectionChange")
+            placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.paymentType')
+            as |paymentType|}}
+             {{paymentType.name}}
+           {{/mab-dropdown}}
+
+           {{#if purchaseTransaction.paymentType}}
+             <form class="form-horizotal" role="form">
+               {{#each paymentDataFields as |paymentDataField|}}
+                  {{mab-input-label field = paymentDataField.value displayText=paymentDataField.field.name size="12"}}
+               {{/each}}
+             </form>
+           {{/if}}
+        </div>
+      </div>
+    </div>
+	</div>
+</section>
+
+<!-- onchange=(action "paymentTypeSelectionChange") -->
+  <div class="form-group">
+    <div class="pull-right" style="margin-top: 20px;">
+      <button class="btn btn-default" {{action "cancel" purchaseTransaction}}>{{t 'product.basic.buttonText.cancel'}}</button>
+      <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.save'}}</button>
+    </div>
+  </div>
+</form>

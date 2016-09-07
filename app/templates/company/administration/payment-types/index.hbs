@@ -1,0 +1,28 @@
+<h1>Payment Types</h1>
+<form class="form-inline pull-right" role="form" {{action "add" name fields on="submit"}}> <!-- horizontal form -->
+    <div class="form-group">
+      <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
+      {{input value=name class="form-control" id="nameInput" }}
+    </div>
+    <div class="form-group">
+      <label for="fieldsInput">{{t 'product.basic.commonWords.acronym'}}</label>
+      {{input value=fields class="form-control" id="fieldsInput" }}
+    </div>
+    <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
+</form>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>{{t 'product.basic.commonWords.name'}}</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model as |paymentType|}}
+    <tr>
+      <td>{{paymentType.name}}</td>
+      <td>{{#link-to "company.administration.payment-types.payment-type.edit" paymentType.id}}<button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>{{/link-to}}</td>
+      <td><button type="submit" class="btn btn-default" {{action "removeUnit" unit}}>{{t 'product.basic.buttonText.delete'}}</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
