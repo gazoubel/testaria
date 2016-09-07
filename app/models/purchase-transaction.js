@@ -4,6 +4,7 @@ export default DS.Model.extend({
   expenseItems: DS.hasMany('expense-item',   {async: true}),
   // projectStage: DS.belongsTo('project-stage',   {async: true}),
   project: DS.belongsTo('project',   {async: true}),
+  provider: DS.belongsTo('provider',   {async: true}),
   description: DS.attr('string'),
   purchaseDate: DS.attr('date'),
   paymentType: DS.belongsTo('payment-type',   {async: true}),

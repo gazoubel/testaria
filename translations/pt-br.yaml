@@ -12,12 +12,15 @@ product:
       units: 'Unidades'
       stages: 'Etapas'
       users: 'Usuarios'
+      providers: 'Fornecedores'
       itemTypes: 'Classificacao de Itens'
       paymentTypes: 'Formas de Pagamento'
     stages:
       title: 'Etapas'
     units:
       title: 'Unidades'
+    providers:
+      title: 'Fornecedores'
     itemTypes:
       title: 'Classificacao de Itens'
     users:

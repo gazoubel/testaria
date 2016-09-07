@@ -21,6 +21,7 @@ Router.map(function() {
           this.route('edit');
         });
       });
+      this.route('provider');
     });
     this.route('projects', function() {
       this.route('new');

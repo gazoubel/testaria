@@ -17,7 +17,6 @@
         <form class="form-inline" role="form">
           <div class="row">
           {{#unless project}}
-          <div class="col-xs-12 col-sm-1">
             <div class="form-group">
               {{#mab-dropdown
                 options=projects
@@ -28,11 +27,9 @@
                  {{project.name}}
                {{/mab-dropdown}}
              </div>
-            </div>
           {{/unless}}
 
           {{#if newItem.project}}
-          <div class="col-xs-12 col-sm-1">
             <div class="form-group">
               {{#mab-dropdown
                 options=newItem.project.projectStages
@@ -43,10 +40,8 @@
                  {{projectStage.name}}
                {{/mab-dropdown}}
              </div>
-            </div>
           {{/if}}
 
-          <div class="col-xs-12 col-sm-1">
             <div class="form-group">
                 {{#mab-dropdown
                   options=itemTypes
@@ -57,21 +52,14 @@
                    {{item.name}}
                  {{/mab-dropdown}}
             </div>
-          </div>
-          <div class="col-xs-12 col-sm-3">
             <div class="form-group">
                 <label class="sr-only" for="descriptionInput">Description</label>
                 {{input value=newItem.description class="form-control" id="descriptionInput" placeholder=(t 'product.basic.commonWords.description') }}
-            </div>
           </div>
-          <div class="col-xs-12 col-sm-3">
             <div class="form-group">
               {{mab-input value=newItem.total class="form-control" id="totalInput" numeric="true" placeholder=(t 'product.basic.commonWords.total')}}
             </div>
-          </div>
-          <div class="col-xs-12 col-sm-2">
             <button class="btn btn-default" {{action "addNewItem" newItem purchaseTransaction}}>{{t 'product.basic.buttonText.add'}}</button>
-          </div>
           <!-- <div class="form-group">
             <div class="col-xs-12 col-sm-2">
             </div>
