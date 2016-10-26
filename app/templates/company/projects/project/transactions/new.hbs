@@ -1,2 +1,5 @@
 <h1>{{t 'product.basic.commonWords.newTransaction'}}</h1>
-{{form-transaction onSave='save' onCancel='cancel' purchaseTransaction = model.purchaseTransaction project = model.project itemTypes=model.itemTypes}}
+{{form-transaction onSave='save' onCancel='cancel'
+purchaseTransaction = model.purchaseTransaction
+project = model.project itemTypes=model.itemTypes
+providers = model.providers}}

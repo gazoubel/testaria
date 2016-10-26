@@ -1,9 +1,32 @@
 <form  class="form-horizotal" role="form" {{action "save" purchaseTransaction on="submit"}}> <!-- horizontal form -->
   <div class="panel-body">
+    <div class="ember-view form-group">
+      <div class="col-sm-offset-9 col-sm-3">
+        <label>Paid</label>
+         <div class="input-group date">
+          <span class="input-group-addon">
+            {{input type="checkbox" name="isPaid" checked=purchaseTransaction.isPaid }}
+          </span>
+          {{mab-input-date value=purchaseTransaction.paymentDate class="form-control" placeholder="payment date" disabled=(not purchaseTransaction.isPaid) }}
+          <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>
+    </div>
+    {{mab-input-label field = purchaseTransaction.description displayText=(t 'product.basic.commonWords.description') size="12"}}
 
-  {{mab-input-label field = purchaseTransaction.description displayText=(t 'product.basic.commonWords.description') size="12"}}
-  {{mab-input-date-label field = purchaseTransaction.purchaseDate displayText=(t 'product.basic.commonWords.purchaseDate') size="4"}}
-</div>
+    {{mab-input-date-label field = purchaseTransaction.purchaseDate displayText=(t 'product.basic.commonWords.purchaseDate') size="4"}}
+    {{mab-input-date-label field = purchaseTransaction.purchasePlannedPaymentDate displayText=(t 'product.basic.commonWords.purchasePlannedPaymentDate') size="4"}}
+    {{#mab-dropdown-label
+      options=providers
+      selected=purchaseTransaction.provider
+      searchField="name"
+      onchange=(action (mut provider))
+      placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.provider')  size="4" displayText=(t 'product.basic.commonWords.provider')
+      as |provider|}}
+       {{provider.name}}
+     {{/mab-dropdown-label}}
+
+  </div>
 <section class="panel panel-default">
 	<header class="panel-heading bg-light">
 		<ul class="nav nav-pills nav-justified">
@@ -88,6 +111,14 @@
               </tr>
               {{/each}}
           </tbody>
+          <tfoot>
+            <tr>
+              <th>Other</th>
+              <th>0.00</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </tfoot>
         </table>
       </div>
       <div class="tab-pane" id="payment">

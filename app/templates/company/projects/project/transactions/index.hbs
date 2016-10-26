@@ -1,4 +1,9 @@
 {{#link-to "company.projects.project.transactions.new"}}<button class="btn btn-default">{{t 'product.basic.commonWords.newTransaction'}}</button>{{/link-to}}
+<div class="btn-group pull-right" role="group">
+  <button type="button" class="btn {{if model.transactionResults.isFilterUnpaid 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "unpaid"}}>Unpaid</button>
+  <button type="button" class="btn {{if model.transactionResults.isFilterAll 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "all"}}>All</button>
+  <button type="button" class="btn {{if model.transactionResults.isFilterPaid 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "paid"}}>Paid</button>
+</div>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -10,7 +15,7 @@
   <tbody>
     <!-- {{#each model.purchaseTransactions as |purchaseTransaction|}}
     {{/each}} -->
-      {{#each model.project.uniquePurchaseTransaction as |transaction|}}
+      {{#each model.transactionResults.purchaseTransactions as |transaction|}}
       <tr>
         <td>{{transaction.description}}</td>
         <td>{{transaction.numberOfItems}}</td>

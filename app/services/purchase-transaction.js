@@ -24,6 +24,7 @@ export default Ember.Service.extend({
       expenseItem.set('project', newItem.project);
       expenseItem.set('projectStage', newItem.projectStage);
       expenseItem.set('purchaseTransaction', purchaseTransaction);
+      expenseItem.set('provider', newItem.provider);
       purchaseTransaction.get('expenseItems').addObject(expenseItem);
       newItem.project.get('expenseItems').addObject(expenseItem);
       newItem.itemType.get('expenseItems').addObject(expenseItem);

@@ -71,11 +71,14 @@ product:
       newTransaction: 'Nova transacao'
       editTransaction: 'Editar transacao'
       purchaseDate: 'Data da compra'
+      purchasePlannedPaymentDate: 'Data planejada para pagamento'
       purchaseItems: 'Items'
       purchasePaymentInfo: 'Pagamento'
+      provider: 'Fornecedor'
       dropdownPlaceholder:
         tipo: 'Tipo'
         project: 'Projeto'
+        provider: 'Fornecedor'
         projectStage: 'Etapa'
         paymentType: 'Forma de Pagamento'
   html:

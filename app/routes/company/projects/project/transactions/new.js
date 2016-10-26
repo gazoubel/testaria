@@ -7,6 +7,7 @@ export default Ember.Route.extend({
       project: this.modelFor("company.projects.project"),
       purchaseTransaction: this.store.createRecord('purchase-transaction'),
       // projects: this.store.findAll('project'),
+      providers: this.store.findAll('provider'),
       itemTypes: this.store.findAll('item-type')
       // stages: this.store.findAll('stage')
     });

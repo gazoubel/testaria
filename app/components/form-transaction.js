@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   purchaseTransaction: {},
   newItem: {total:'', description:''},
   itemTypes: {},
+  providers: {},
   itemsRemoved: [],
   paymentTypes: null,
   // itemSelection: null,
@@ -20,6 +21,7 @@ export default Ember.Component.extend({
     if (this.project) {
       this.newItem.project=this.project;
       this.projects = null;
+      this.purchaseTransaction.set('project', this.project);
     }
     var paymentType = this.purchaseTransaction.get('paymentType');
     if (paymentType.get('id')) {
@@ -57,13 +59,24 @@ export default Ember.Component.extend({
       if (paymentType.get('id')) {
         var payment = {};
         ref.get('paymentDataFields').forEach(function(paymentDataField) {
-          payment[paymentDataField.get('field.name')] = paymentDataField.value;
+          payment[paymentDataField.get('field.name')] = paymentDataField.value?paymentDataField.value:'';
         });
         // var paymentInfo = { paymentType: this.get('itemSelection'), values:payment};
         // purchaseTransaction.set('paymentInfo.payymentType', this.get('itemSelection'));
         purchaseTransaction.set('paymentInfo', payment);
       }
+
+      // if (provider) {
+      //   provider.get('purchaseTransactions').addObject(purchaseTransaction);
+      // }
       purchaseTransaction.save().then(function(purchaseTransaction) {
+          var providerPromisse = purchaseTransaction.get('provider').then(function(provider){
+            if (provider) {
+              provider.get('purchaseTransactions').addObject(purchaseTransaction);
+            }
+            return provider.save();
+          });
+          promises.push(providerPromisse);
           purchaseTransaction.get('expenseItems').forEach(function(item) {
             promises.push(item.save());
             item.get('project').then(function(project){

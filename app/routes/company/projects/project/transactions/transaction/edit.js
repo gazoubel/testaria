@@ -11,6 +11,7 @@ export default Ember.Route.extend({
       // projects: this.store.findAll('project'),
       project: project,
       itemTypes: this.store.findAll('item-type'),
+      providers: this.store.findAll('provider'),
       paymentTypes:  this.store.findAll('payment-type')
     });
   },

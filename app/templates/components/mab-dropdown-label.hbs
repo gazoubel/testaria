@@ -6,6 +6,8 @@
     {{#mab-dropdown
       options=options
       selected=selected
+      searchField = searchField
+      renderInPlace=true
       onchange=(action (mut selected))
       as |item|}}
        {{yield item}}
@@ -21,6 +23,8 @@
     {{#mab-dropdown
       options=options
       selected=selected
+      searchField = searchField
+      renderInPlace=true
       onchange=(action (mut selected))
       as |item|}}
        {{yield item}}

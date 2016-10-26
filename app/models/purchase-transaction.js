@@ -7,8 +7,11 @@ export default DS.Model.extend({
   provider: DS.belongsTo('provider',   {async: true}),
   description: DS.attr('string'),
   purchaseDate: DS.attr('date'),
+  purchasePlannedPaymentDate: DS.attr('date'),
   paymentType: DS.belongsTo('payment-type',   {async: true}),
   paymentInfo: DS.attr(),
+  isPaid: DS.attr('boolean', { defaultValue: false }),
+  paymentDate: DS.attr('date'),
   totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');
     if (!expenseItems) {
