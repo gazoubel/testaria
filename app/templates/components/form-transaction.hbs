@@ -25,6 +25,7 @@
       as |provider|}}
        {{provider.name}}
      {{/mab-dropdown-label}}
+     {{mab-input-label field = purchaseTransaction.total displayText=(t 'product.basic.commonWords.total') size="4" numeric="true"}}
 
   </div>
 <section class="panel panel-default">
@@ -114,7 +115,7 @@
           <tfoot>
             <tr>
               <th>Other</th>
-              <th>0.00</th>
+              <th>{{format-number purchaseTransaction.other style='currency' currency='BRL' fallback='nothing'}}</th>
               <th></th>
               <th></th>
             </tr>

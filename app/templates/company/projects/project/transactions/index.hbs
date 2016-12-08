@@ -19,7 +19,7 @@
       <tr>
         <td>{{transaction.description}}</td>
         <td>{{transaction.numberOfItems}}</td>
-        <td>{{format-number transaction.totalExpense style='currency' currency='BRL' fallback='nothing'}}</td>
+        <td>{{format-number transaction.total style='currency' currency='BRL' fallback='nothing'}}</td>
         <td>
           {{#link-to "company.projects.project.transactions.transaction.edit" transaction.id}}
             <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>

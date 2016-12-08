@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   model: function (params) {
+    console.log('in model of transaction/edit.js');
     var project = this.modelFor("company.projects.project");
     // project.reload();
     var purchaseTransaction= this.modelFor("company.projects.project.transactions.transaction");

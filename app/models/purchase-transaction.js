@@ -12,6 +12,12 @@ export default DS.Model.extend({
   paymentInfo: DS.attr(),
   isPaid: DS.attr('boolean', { defaultValue: false }),
   paymentDate: DS.attr('date'),
+  total: DS.attr('number'),
+  other: Ember.computed('total','expenseItems.@each.total', 'expenseItems.[]', function() {
+    var total = this.get('total');
+    var totalExpense = this.get('totalExpense');
+    return total - totalExpense;
+  }),
   totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');
     if (!expenseItems) {

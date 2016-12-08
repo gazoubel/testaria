@@ -23,28 +23,29 @@ export default Ember.Component.extend({
       this.projects = null;
       this.purchaseTransaction.set('project', this.project);
     }
-    var paymentType = this.purchaseTransaction.get('paymentType');
-    if (paymentType.get('id')) {
-      var paymentInfo = this.purchaseTransaction.get('paymentInfo');
-      var pData = paymentType.get('paymentTypeFields').map(function(field){
-        return Ember.Object.create({
-          field: field,
-          value: paymentInfo?paymentInfo[field.get('name')]:null
+    var self = this;
+    self.purchaseTransaction.get('paymentType').then(function(paymentType){
+      var paymentInfo=self.purchaseTransaction.get('paymentInfo');
+      paymentType.get('paymentTypeFields').then(function (paymentTypeFields) {
+        var pData = paymentTypeFields.map(function(field){
+          return Ember.Object.create({
+            field: field,
+            value: paymentInfo?paymentInfo[field.get('name')]:null
+          });
         });
-      });
-      this.paymentDataFields = pData;
-    }
+        console.log('in form-transaction inits paymenttype data'+pData );
+        self.set('paymentDataFields',pData);
+      })
+    });
   },
   actions: {
     paymentTypeSelectionChange(paymentType) {
       var self = this;
-      // this.set('itemSelection',paymentType);
 
       var paymentInfo = this.get('purchaseTransaction.paymentInfo');
       var pData = paymentType.get('paymentTypeFields').map(function(field){
         return Ember.Object.create({
           field: field,
-          // value: paymentInfo?paymentInfo[field.get('name')]:null
           value: null
         });
       });
@@ -61,14 +62,9 @@ export default Ember.Component.extend({
         ref.get('paymentDataFields').forEach(function(paymentDataField) {
           payment[paymentDataField.get('field.name')] = paymentDataField.value?paymentDataField.value:'';
         });
-        // var paymentInfo = { paymentType: this.get('itemSelection'), values:payment};
-        // purchaseTransaction.set('paymentInfo.payymentType', this.get('itemSelection'));
         purchaseTransaction.set('paymentInfo', payment);
       }
 
-      // if (provider) {
-      //   provider.get('purchaseTransactions').addObject(purchaseTransaction);
-      // }
       purchaseTransaction.save().then(function(purchaseTransaction) {
           var providerPromisse = purchaseTransaction.get('provider').then(function(provider){
             if (provider) {

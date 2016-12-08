@@ -22,7 +22,11 @@
         {{#unless projectStage.totalExpense}}
           <button class="btn btn-default" {{action "remove" projectStage}}>{{t 'product.basic.buttonText.delete'}}</button>
         {{/unless}}
-        {{#link-to "company.projects.project.etapas.etapa.edit" projectStage}}
+
+        {{#link-to "company.projects.project.etapas.etapa" projectStage.id}}
+          <button class="btn btn-default">{{t 'product.basic.buttonText.view'}}</button>
+        {{/link-to}}
+        {{#link-to "company.projects.project.etapas.etapa.edit" projectStage.id}}
           <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>
         {{/link-to}}</td>
       </tr>

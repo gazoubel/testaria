@@ -8,7 +8,8 @@ export default Ember.Route.extend({
       purchaseTransaction: this.store.createRecord('purchase-transaction'),
       // projects: this.store.findAll('project'),
       providers: this.store.findAll('provider'),
-      itemTypes: this.store.findAll('item-type')
+      itemTypes: this.store.findAll('item-type'),
+      paymentTypes:  this.store.findAll('payment-type')
       // stages: this.store.findAll('stage')
     });
   },
