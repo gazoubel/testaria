@@ -16,7 +16,7 @@ export default Ember.Route.extend({
     //   storageBucket: "azoba-router.appspot.com",
     // };
     // var routerApp = firebase.initializeApp(config, "router");
-    // var initalRef = routerApp.database().ref("A").once('value')
+    // var initalRef = routerApp.database().ref("AZOUBA").once('value')
     //   .then(function(snapshot){
     //     var value = snapshot.val();
     //     if (value) {
@@ -45,7 +45,7 @@ export default Ember.Route.extend({
       var url = null;
       var baseRef = this;
 
-      var ref = companyApp.database().ref();
+      // var ref = companyApp.database().ref();
       var userCreationPromisse = companyApp.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
         // Handle Errors here.
         var errorCode = error.code;
