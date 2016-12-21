@@ -8,7 +8,7 @@ export default DS.Model.extend({
   total: DS.attr('number'),
   totalWithProfit: DS.attr('number'),
   expenseItems: DS.hasMany('expense-item',   {async: true}),
-  totalSpent: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
+  totalSpentInItems: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');
     if (!expenseItems) {
       return 0;
@@ -16,6 +16,18 @@ export default DS.Model.extend({
     return expenseItems.reduce(function(prev, item) {
       return (prev || 0) + Number(item.get('total'));
     });
+  }),
+  totalSpentInOther: Ember.computed('purchaseTransactions.@each.other', 'purchaseTransactions.[]', function() {
+    var purchaseTransactions = this.get('purchaseTransactions');
+    if (!purchaseTransactions) {
+      return 0;
+    }
+    return purchaseTransactions.reduce(function(prev, item) {
+      return (prev || 0) + Number(item.get('other'));
+    });
+  }),
+  totalSpent: Ember.computed('totalSpentInOther', 'totalSpentInItems', function() {
+    return this.get('totalSpentInItems') + this.get('totalSpentInOther');
   }),
   unassignedPurchaseTransaction: Ember.computed('expenseItems.[]', function(){
     return this.get('expenseItems').filterBy('projectStageAssigned', false);
