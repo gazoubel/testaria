@@ -27,17 +27,19 @@ export default Ember.Component.extend({
     }
     var self = this;
     self.purchaseTransaction.get('paymentType').then(function(paymentType){
-      var paymentInfo=self.purchaseTransaction.get('paymentInfo');
-      paymentType.get('paymentTypeFields').then(function (paymentTypeFields) {
-        var pData = paymentTypeFields.map(function(field){
-          return Ember.Object.create({
-            field: field,
-            value: paymentInfo?paymentInfo[field.get('name')]:null
+      if (paymentType) {
+        var paymentInfo=self.purchaseTransaction.get('paymentInfo');
+        paymentType.get('paymentTypeFields').then(function (paymentTypeFields) {
+          var pData = paymentTypeFields.map(function(field){
+            return Ember.Object.create({
+              field: field,
+              value: paymentInfo?paymentInfo[field.get('name')]:null
+            });
           });
-        });
-        console.log('in form-transaction inits paymenttype data'+pData );
-        self.set('paymentDataFields',pData);
-      })
+          console.log('in form-transaction inits paymenttype data'+pData );
+          self.set('paymentDataFields',pData);
+        })
+      }
     });
   },
   actions: {
@@ -69,6 +71,9 @@ export default Ember.Component.extend({
           payment[paymentDataField.get('field.name')] = paymentDataField.value?paymentDataField.value:'';
         });
         purchaseTransaction.set('paymentInfo', payment);
+      } else {
+        // var payment = {};
+        purchaseTransaction.set('paymentInfo', null);
       }
 
 
@@ -84,12 +89,15 @@ export default Ember.Component.extend({
           if (ref.get('selectedOtherProjectStage.id') != purchaseTransaction.get('otherProjectStage.id')) {
             //delete old reference
             var otherProjectStageDeletePromisse = purchaseTransaction.get('otherProjectStage').then(function(previousOtherProjectStage){
-              previousOtherProjectStage.get('otherPurchaseTransactions').then(function(otherPurchaseTransactions){
-                otherPurchaseTransactions.removeObject(purchaseTransaction);
-              })
-              return previousOtherProjectStage.save();
+              if (previousOtherProjectStage) {
+                previousOtherProjectStage.get('otherPurchaseTransactions').then(function(otherPurchaseTransactions){
+                  otherPurchaseTransactions.removeObject(purchaseTransaction);
+                })
+                return previousOtherProjectStage.save();
+              }
             });
-            promises.push(otherProjectStageDeletePromisse);
+            if(otherProjectStageDeletePromisse)
+              promises.push(otherProjectStageDeletePromisse);
 
             // add new reference
             let otherProjectStage = ref.get('selectedOtherProjectStage');
@@ -127,7 +135,7 @@ export default Ember.Component.extend({
       Ember.RSVP.all(promises).then(function() {
         ref.sendAction('onSave', purchaseTransaction);
       }, function(error) {
-        baseRef.get('appManager').notify('error', 'Could not save!');
+        baseRef.get('appManager').notify('error', 'Could not save!'+error);
       });
     },
     cancel(purchaseTransaction){

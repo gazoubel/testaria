@@ -9,8 +9,7 @@ export default DS.Model.extend({
   stage: DS.belongsTo('stage',   {async: true, inverse: null}),
   expenseItems: DS.hasMany('expense-item',   {async: true}),
   otherPurchaseTransactions: DS.hasMany('purchase-transaction',   {async: true}),
-
-  totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
+  totalSpentInItems: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');
     if (!expenseItems) {
       return 0;
@@ -18,25 +17,29 @@ export default DS.Model.extend({
     return expenseItems.reduce(function(prev, item) {
       return (prev || 0) + Number(item.get('total'));
     });
-    // return this.get('expenseItems').then(function(et){
-    //   if (!et) {
-    //     return 0;
-    //   }
-    //   return et.reduce(function(prev, item) {
-    //     var totalExpense = item.get('total') || 0;
-    //     return (prev || 0) + Number(totalExpense) ;
-    //   });
-    // });
-
-  })
-  // totalExpense: Ember.computed('purchaseTransactions.@each.totalExpense', 'purchaseTransactions.[]', function() {
-  //   var pt = this.get('purchaseTransactions');
-  //   if (!pt) {
+  }),
+  totalSpentInOther: Ember.computed('otherPurchaseTransactions.@each.other', 'otherPurchaseTransactions.[]', function() {
+    var purchaseTransactions = this.get('otherPurchaseTransactions');
+    if (!purchaseTransactions) {
+      return 0;
+    }
+    return purchaseTransactions.reduce(function(prev, item) {
+      return (prev || 0) + Number(item.get('other'));
+    });
+  }),
+  totalSpent: Ember.computed('totalSpentInOther', 'totalSpentInItems', function() {
+    let itemsTotal = this.get('totalSpentInItems');
+    let othersTotal = this.get('totalSpentInOther');
+    return (itemsTotal||0) + (othersTotal||0);
+  }),
+  // totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
+  //   var expenseItems = this.get('expenseItems');
+  //   if (!expenseItems) {
   //     return 0;
   //   }
-  //   return pt.reduce(function(prev, item) {
-  //     var totalExpense = item.get('totalExpense') || 0;
-  //     return (prev || 0) + Number(totalExpense) ;
+  //   return expenseItems.reduce(function(prev, item) {
+  //     return (prev || 0) + Number(item.get('total'));
   //   });
+  //
   // })
 });
