@@ -14,10 +14,12 @@ export default Ember.Component.extend({
   // itemSelection: null,
   paymentDataFields: {},
   payment: {},
+  selectedOtherProjectStage:null,
   init() {
     this._super(...arguments);
     this.newItem = {total:'', description:''};
     this.itemsRemoved= [];
+    this.selectedOtherProjectStage = this.purchaseTransaction.get('otherProjectStage');
     if (this.project) {
       this.newItem.project=this.project;
       this.projects = null;
@@ -52,6 +54,10 @@ export default Ember.Component.extend({
       self.set('purchaseTransaction.paymentType',paymentType);
       self.set('paymentDataFields',pData);
     },
+    // otherProjectStageChanged(otherProjectStage){
+    //   var self = this;
+    //
+    // },
     save(purchaseTransaction){
       var ref = this;
       var promises = new Array();
@@ -65,6 +71,8 @@ export default Ember.Component.extend({
         purchaseTransaction.set('paymentInfo', payment);
       }
 
+
+
       purchaseTransaction.save().then(function(purchaseTransaction) {
           var providerPromisse = purchaseTransaction.get('provider').then(function(provider){
             if (provider) {
@@ -72,6 +80,28 @@ export default Ember.Component.extend({
             }
             return provider.save();
           });
+          // other project stage
+          if (ref.get('selectedOtherProjectStage.id') != purchaseTransaction.get('otherProjectStage.id')) {
+            //delete old reference
+            var otherProjectStageDeletePromisse = purchaseTransaction.get('otherProjectStage').then(function(previousOtherProjectStage){
+              previousOtherProjectStage.get('otherPurchaseTransactions').then(function(otherPurchaseTransactions){
+                otherPurchaseTransactions.removeObject(purchaseTransaction);
+              })
+              return previousOtherProjectStage.save();
+            });
+            promises.push(otherProjectStageDeletePromisse);
+
+            // add new reference
+            let otherProjectStage = ref.get('selectedOtherProjectStage');
+            purchaseTransaction.set('otherProjectStage', otherProjectStage);
+            promises.push(purchaseTransaction.save());
+            otherProjectStage.get('otherPurchaseTransactions').then(function(otherPurchaseTransactions){
+              otherPurchaseTransactions.addObject(purchaseTransaction);
+            })
+
+            promises.push(otherProjectStage.save());
+          }
+
           promises.push(providerPromisse);
           purchaseTransaction.get('expenseItems').forEach(function(item) {
             promises.push(item.save());
@@ -79,7 +109,8 @@ export default Ember.Component.extend({
               promises.push(project.save());
             });
             item.get('itemType').then(function(itemType){
-              promises.push(itemType.save());
+              if(itemType)
+                promises.push(itemType.save());
             });
 
             item.get('projectStage').then(function(projectStage){

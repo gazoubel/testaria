@@ -2,7 +2,7 @@ import DS from 'ember-data';
 
 export default DS.Model.extend({
   expenseItems: DS.hasMany('expense-item',   {async: true}),
-  // projectStage: DS.belongsTo('project-stage',   {async: true}),
+  otherProjectStage: DS.belongsTo('project-stage',   {async: true}),
   project: DS.belongsTo('project',   {async: true}),
   provider: DS.belongsTo('provider',   {async: true}),
   description: DS.attr('string'),
@@ -27,14 +27,14 @@ export default DS.Model.extend({
       return (prev || 0) + Number(item.get('total'));
     });
   }),
-  projectStageAssigned: Ember.computed('projectStage', function() {
-    var projectStage = this.get('projectStage.id');
-    if (projectStage) {
-      return true;
-    } else {
-      return false;
-    }
-  }),
+  // projectStageAssigned: Ember.computed('projectStage', function() {
+  //   var projectStage = this.get('projectStage.id');
+  //   if (projectStage) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }),
   numberOfItems: Ember.computed('expenseItems.[]', function() {
     return this.get('expenseItems.length');
   })

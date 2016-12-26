@@ -116,7 +116,20 @@
             <tr>
               <th>Other</th>
               <th>{{format-number purchaseTransaction.other style='currency' currency='BRL' fallback='nothing'}}</th>
-              <th></th>
+              <th>
+                {{#if purchaseTransaction.project}}
+                  <div class="form-group">
+                    {{#mab-dropdown
+                      options=purchaseTransaction.project.projectStages
+                      selected=selectedOtherProjectStage
+                      onchange=(action (mut selectedOtherProjectStage))
+                      placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.projectStage')
+                      as |projectStage|}}
+                       {{projectStage.name}}
+                     {{/mab-dropdown}}
+                   </div>
+                {{/if}}
+              </th>
               <th></th>
             </tr>
           </tfoot>

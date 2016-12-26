@@ -8,7 +8,7 @@ export default DS.Model.extend({
   project: DS.belongsTo('project',   {async: true}),
   stage: DS.belongsTo('stage',   {async: true, inverse: null}),
   expenseItems: DS.hasMany('expense-item',   {async: true}),
-  // // purchaseTransactions: DS.hasMany('purchase-transaction',   {async: true}),
+  otherPurchaseTransactions: DS.hasMany('purchase-transaction',   {async: true}),
 
   totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');
