@@ -45,6 +45,7 @@ product:
       edit: 'Alterar'
       cancel: 'Cancelar'
       save: 'Salvar'
+      view: 'Ver'
     commonWords:
       name: 'Nome'
       description: 'Descricao'
