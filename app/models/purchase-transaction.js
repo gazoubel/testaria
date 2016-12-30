@@ -13,10 +13,15 @@ export default DS.Model.extend({
   isPaid: DS.attr('boolean', { defaultValue: false }),
   paymentDate: DS.attr('date'),
   total: DS.attr('number'),
-  other: Ember.computed('total','expenseItems.@each.total', 'expenseItems.[]', function() {
+  // other: Ember.computed('total','expenseItems.@each.total', 'expenseItems.[]', function() {
+  other: Ember.computed('total','totalExpense', function() {
     var total = this.get('total');
     var totalExpense = this.get('totalExpense');
-    return total - totalExpense;
+    var totalOther = total - totalExpense;
+    if (!totalOther) {
+      return 0;
+    }
+    return totalOther;
   }),
   totalExpense: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {
     var expenseItems = this.get('expenseItems');

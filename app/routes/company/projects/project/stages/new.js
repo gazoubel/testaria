@@ -10,7 +10,7 @@ export default Ember.Route.extend({
   },
   actions: {
       save(projectStage){
-        this.transitionTo('company.projects.project.etapas');
+        this.transitionTo('company.projects.project.stages');
         // var ref = this;
         // var controller = this.get('controller');
         // var project = this.get("currentModel.project");

@@ -29,10 +29,10 @@ Router.map(function() {
       this.route('project', {
         path: ':project_id'
       }, function() {
-        this.route('etapas', function() {
+        this.route('stages', function() {
           this.route('new');
 
-          this.route('etapa', {
+          this.route('stage', {
             path: ':project_stage_id'
           }, function() {
             this.route('edit');
