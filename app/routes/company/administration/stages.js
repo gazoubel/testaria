@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   name: '',
+  modelIsInValid: false,
   model: function () {
     return this.store.findAll('stage');
   },
@@ -9,19 +10,19 @@ export default Ember.Route.extend({
   actions: {
       addStage: function (name, acronym){
         var controller = this.get('controller');
-
-        // var company = this.get("currentModel");
-
         var stage = this.store.createRecord('stage', {
           name: name,
         });
 
-        // company.get('stages').addObject(stage);
+        controller.set('modelIsInValid', false);
+        if (!stage.get('validations.isValid')) {
+          controller.set('modelIsInValid', true);
+          stage.rollbackAttributes();
+          return;
+        }
 
         stage.save().then(function() {
-          // return company.save().then(function(){
             controller.set('name', '');
-          // });
         }).catch(function(reason){
           this.set('mostrarErro', true);
         });
