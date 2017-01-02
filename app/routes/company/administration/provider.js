@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   name: '',
+  modelIsInValid: false,
   model: function () {
     return this.store.findAll('provider');
   },
@@ -15,11 +16,19 @@ export default Ember.Route.extend({
           name: name
         });
 
+        controller.set('modelIsInValid', false);
+        if (!provider.get('validations.isValid')) {
+          baseRef.get('appManager').notify('error', provider.get('validations.messages'));
+          controller.set('modelIsInValid', true);
+          provider.rollbackAttributes();
+          return;
+        }
+
         provider.save().then(function() {
             baseRef.get('appManager').notify('success', "Provider Created");
             controller.set('name', '');
         }).catch(function(reason){
-          baseRef.get('appManager').notify('error', "Error creating user:" + reason);
+          baseRef.get('appManager').notify('error', "Error creating provider:" + reason);
         });
       },
 

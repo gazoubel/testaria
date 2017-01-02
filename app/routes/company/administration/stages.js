@@ -9,6 +9,7 @@ export default Ember.Route.extend({
 
   actions: {
       addStage: function (name, acronym){
+        var baseRef = this;
         var controller = this.get('controller');
         var stage = this.store.createRecord('stage', {
           name: name,
@@ -17,14 +18,16 @@ export default Ember.Route.extend({
         controller.set('modelIsInValid', false);
         if (!stage.get('validations.isValid')) {
           controller.set('modelIsInValid', true);
+          baseRef.get('appManager').notify('error', stage.get('validations.messages'));
           stage.rollbackAttributes();
           return;
         }
 
         stage.save().then(function() {
             controller.set('name', '');
+            baseRef.get('appManager').notify('success', "Stage Created");
         }).catch(function(reason){
-          this.set('mostrarErro', true);
+          baseRef.get('appManager').notify('error', "Error creating stage:" + reason);
         });
       },
       removeStage: function (stage){

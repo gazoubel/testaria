@@ -1,6 +1,6 @@
 <h1>{{t 'product.administration.itemTypes.title'}}</h1>
 <form class="form-inline pull-right" role="form" {{action "addItemType" name on="submit"}}> <!-- horizontal form -->
-    <div class="form-group">
+    <div class="form-group {{if modelIsInValid "has-error"}}">
       <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
       {{input value=name class="form-control" id="nameInput" }}
     </div>

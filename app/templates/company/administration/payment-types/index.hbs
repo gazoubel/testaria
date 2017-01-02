@@ -1,13 +1,13 @@
 <h1>Payment Types</h1>
-<form class="form-inline pull-right" role="form" {{action "add" name fields on="submit"}}> <!-- horizontal form -->
-    <div class="form-group">
+<form class="form-inline pull-right" role="form" {{action "add" name on="submit"}}> <!-- horizontal form -->
+    <div class="form-group {{if modelIsInValid "has-error"}}">
       <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
       {{input value=name class="form-control" id="nameInput" }}
     </div>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="fieldsInput">{{t 'product.basic.commonWords.acronym'}}</label>
       {{input value=fields class="form-control" id="fieldsInput" }}
-    </div>
+    </div> -->
     <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
 </form>
 <table class="table table-striped">

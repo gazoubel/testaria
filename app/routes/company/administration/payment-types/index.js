@@ -4,30 +4,34 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   name: '',
   fields: '',
+  modelIsInValid: false,
   model: function () {
     return this.store.findAll('payment-type');
   },
 
   actions: {
-      add: function (name, fields){
+      add: function (name){
+        var baseRef = this;
         var controller = this.get('controller');
 
-        // var company = this.get("currentModel");
-
         var paymentType = this.store.createRecord('payment-type', {
-          name: name,
-          fields: fields
+          name: name
         });
 
-        // company.get('units').addObject(unit);
+        controller.set('modelIsInValid', false);
+        if (!paymentType.get('validations.isValid')) {
+          baseRef.get('appManager').notify('error', paymentType.get('validations.messages'));
+          controller.set('modelIsInValid', true);
+          paymentType.rollbackAttributes();
+          return;
+        }
 
         paymentType.save().then(function() {
-          // return company.save().then(function(){
-            controller.set('name', '');
-            controller.set('fields', '');
-          // });
+          baseRef.get('appManager').notify('success', "paymentType Created");
+          controller.set('name', '');
+          controller.set('fields', '');
         }).catch(function(reason){
-          this.set('mostrarErro', true);
+          baseRef.get('appManager').notify('error', "Error creating paymentType:" + reason);
         });
       },
       removeUnit: function (paymentType){
