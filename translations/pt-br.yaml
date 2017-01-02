@@ -46,6 +46,7 @@ product:
       cancel: 'Cancelar'
       save: 'Salvar'
       view: 'Ver'
+      details: 'Detalhes'
     commonWords:
       name: 'Nome'
       description: 'Descricao'

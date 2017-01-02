@@ -7,13 +7,15 @@
   {{#link-to "company.projects.project.stages" tagName="li"}}
   <a href={{view.href}}>{{t 'product.projects.menu.stages'}}</a>
   {{/link-to}}
-  {{#link-to "company.projects.project.execution" tagName="li"}}
+  <!-- {{#link-to "company.projects.project.execution" tagName="li"}}
   <a href={{view.href}}>{{t 'product.projects.menu.execution'}}</a>
-  {{/link-to}}
+  {{/link-to}} -->
   {{#link-to "company.projects.project.transactions" model.id tagName="li"}}
   <a href={{view.href}}>{{t 'product.projects.menu.transactions'}}</a>
   {{/link-to}}
 </ul>
 <div class="tab-content">
-{{outlet}}
+  <div style="margin-top: 10px;margin-left: 10px; margin-right: 10px;">
+    {{outlet}}
+  </div>
 </div>

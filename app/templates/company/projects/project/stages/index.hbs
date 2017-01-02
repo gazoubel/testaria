@@ -19,12 +19,12 @@
       <td>{{format-number projectStage.total style='currency' currency='BRL' fallback='nothing'}}</td>
       <td>{{format-number projectStage.totalSpent style='currency' currency='BRL' fallback='nothing'}}</td>
       <td>
-        {{#unless projectStage.totalExpense}}
+        {{#unless projectStage.totalSpent}}
           <button class="btn btn-default" {{action "remove" projectStage}}>{{t 'product.basic.buttonText.delete'}}</button>
         {{/unless}}
 
         {{#link-to "company.projects.project.stages.stage" projectStage.id}}
-          <button class="btn btn-default">{{t 'product.basic.buttonText.view'}}</button>
+          <button class="btn btn-default">{{t 'product.basic.buttonText.details'}}</button>
         {{/link-to}}
         {{#link-to "company.projects.project.stages.stage.edit" projectStage.id}}
           <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>

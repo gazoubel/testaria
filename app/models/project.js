@@ -5,7 +5,16 @@ export default DS.Model.extend({
   location: DS.attr('string'),
   projectStages: DS.hasMany('project-stage',   {async: true}),
   purchaseTransactions: DS.hasMany('purchase-transaction',   {async: true}),
-  total: DS.attr('number'),
+  // total: DS.attr('number'),
+  total: Ember.computed('projectStages.@each.total', 'projectStages.[]', function() {
+    var projectStages = this.get('projectStages');
+    if (!projectStages) {
+      return 0;
+    }
+    return projectStages.reduce(function(prev, item) {
+      return (prev || 0) + Number(item.get('total'));
+    });
+  }),
   totalWithProfit: DS.attr('number'),
   expenseItems: DS.hasMany('expense-item',   {async: true}),
   totalSpentInItems: Ember.computed('expenseItems.@each.total', 'expenseItems.[]', function() {

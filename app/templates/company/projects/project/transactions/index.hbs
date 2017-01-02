@@ -1,31 +1,37 @@
-{{#link-to "company.projects.project.transactions.new"}}<button class="btn btn-default">{{t 'product.basic.commonWords.newTransaction'}}</button>{{/link-to}}
-<div class="btn-group pull-right" role="group">
-  <button type="button" class="btn {{if model.transactionResults.isFilterUnpaid 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "unpaid"}}>Unpaid</button>
-  <button type="button" class="btn {{if model.transactionResults.isFilterAll 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "all"}}>All</button>
-  <button type="button" class="btn {{if model.transactionResults.isFilterPaid 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "paid"}}>Paid</button>
+<div class="container-fluid">  
+  <div class="row">
+    {{#link-to "company.projects.project.transactions.new"}}<button class="btn btn-default">{{t 'product.basic.commonWords.newTransaction'}}</button>{{/link-to}}
+    <div class="btn-group pull-right" role="group">
+      <button type="button" class="btn {{if model.transactionResults.isFilterUnpaid 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "unpaid"}}>Unpaid</button>
+      <button type="button" class="btn {{if model.transactionResults.isFilterAll 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "all"}}>All</button>
+      <button type="button" class="btn {{if model.transactionResults.isFilterPaid 'btn-primary' 'btn-default'}}" onclick={{action (mut model.transactionResults.filter) "paid"}}>Paid</button>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{{t 'product.basic.commonWords.description'}}</th>
+          <th>{{t 'product.basic.commonWords.numberOfItems'}}</th>
+          <th>{{t 'product.basic.commonWords.total'}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- {{#each model.purchaseTransactions as |purchaseTransaction|}}
+        {{/each}} -->
+          {{#each model.transactionResults.purchaseTransactions as |transaction|}}
+          <tr>
+            <td>{{transaction.description}}</td>
+            <td>{{transaction.numberOfItems}}</td>
+            <td>{{format-number transaction.total style='currency' currency='BRL' fallback='nothing'}}</td>
+            <td>
+              {{#link-to "company.projects.project.transactions.transaction.edit" transaction.id}}
+                <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>
+              {{/link-to}}
+            </td>
+          </tr>
+          {{/each}}
+      </tbody>
+    </table>
+  </div>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>{{t 'product.basic.commonWords.description'}}</th>
-      <th>{{t 'product.basic.commonWords.numberOfItems'}}</th>
-      <th>{{t 'product.basic.commonWords.total'}}</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- {{#each model.purchaseTransactions as |purchaseTransaction|}}
-    {{/each}} -->
-      {{#each model.transactionResults.purchaseTransactions as |transaction|}}
-      <tr>
-        <td>{{transaction.description}}</td>
-        <td>{{transaction.numberOfItems}}</td>
-        <td>{{format-number transaction.total style='currency' currency='BRL' fallback='nothing'}}</td>
-        <td>
-          {{#link-to "company.projects.project.transactions.transaction.edit" transaction.id}}
-            <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>
-          {{/link-to}}
-        </td>
-      </tr>
-      {{/each}}
-  </tbody>
-</table>
