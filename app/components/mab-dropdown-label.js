@@ -3,6 +3,9 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['form-group'],
 
+  classNameBindings: ['hasError'],
+  hasError: false,
+
   options: {},
   selected: {},
   displayText: '',

@@ -5,6 +5,9 @@ export default Ember.Component.extend({
 
   classNames: ['form-group'],
 
+  classNameBindings: ['hasError'],
+  hasError: false,
+
   field: null,
   displayText: '',
   isDisabled: false,

@@ -5,11 +5,20 @@ const Validations = buildValidations({
   stage: [
     validator('presence', true),
     validator('belongs-to')
-  ]
+  ],
+  total : [
+    validator('presence', true),
+    validator('number', {
+      allowString: true,
+      positive : true
+    })
+  ],
+  // startdate: validator('date'),
+  // enddate: validator('date')
 });
 
 export default DS.Model.extend(Validations,{
-  // name: DS.attr('string'),
+  displayName: DS.attr('string'),
   total: DS.attr('number'),
   startdate: DS.attr('date'),
   enddate: DS.attr('date'),

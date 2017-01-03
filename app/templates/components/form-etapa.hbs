@@ -1,16 +1,25 @@
 <form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
-  {{#mab-dropdown-label
-    options=stages
-    selected=selectedStage
-    displayText=(t 'product.basic.commonWords.stage')
-    size="4" as |item|}}
-    {{item.name}}
-  {{/mab-dropdown-label}}
-
-  <!-- {{mab-input-label field = projectStage.name displayText=(t 'product.basic.commonWords.name') size="12"}} -->
-  {{mab-input-date-label field = projectStage.startdate displayText=(t 'product.basic.commonWords.initialDate') size="4"}}
-  {{mab-input-date-label field = projectStage.enddate displayText=(t 'product.basic.commonWords.endDate') size="4"}}
-  {{mab-input-label field = projectStage.total displayText=(t 'product.basic.commonWords.total') size="4"}}
+  <div class="row">
+    {{#mab-dropdown-label
+      hasError=projectStage.validations.attrs.stage.isInvalid
+      options=stages
+      selected=projectStage.stage
+      displayText=(t 'product.basic.commonWords.stage')
+      size="4" as |item|}}
+      {{item.name}}
+    {{/mab-dropdown-label}}
+  </div>
+  <div class="row">
+    {{mab-input-label field = projectStage.displayName displayText=(t 'product.basic.commonWords.name') size="12"}}
+  </div>
+  <div class="row">
+    {{mab-input-label field = projectStage.total displayText=(t 'product.basic.commonWords.total')
+      size="4" hasError=projectStage.validations.attrs.total.isInvalid}}
+    {{mab-input-date-label field = projectStage.startdate displayText=(t 'product.basic.commonWords.initialDate')
+      size="4" hasError=projectStage.validations.attrs.startdate.isInvalid}}
+    {{mab-input-date-label field = projectStage.enddate displayText=(t 'product.basic.commonWords.endDate')
+      size="4" hasError=projectStage.validations.attrs.enddate.isInvalid}}
+  </div>
   <br/>
   <div class="form-group">
     <div class="pull-right" style="margin-top: 20px;">
