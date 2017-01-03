@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 export default EmberPowerSelect.extend({
   searchEnabled: true,
-  allowClear: false,
+  allowClear: true,
   intl: Ember.inject.service(),
   placeholder: Ember.computed(function() {
     return this.get('intl').t('product.basic.commonWords.select');

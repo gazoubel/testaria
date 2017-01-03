@@ -1,23 +1,31 @@
 <h1>Novo Projeto</h1>
 <form  role="form" {{action "add" model.project on="submit"}}> <!-- horizontal form -->
-    <div class="form-group">
+    <div class="form-group {{if model.project.validations.attrs.name.isInvalid "has-error"}}">
       <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
       {{input value=model.project.name class="form-control" id="nameInput" }}
+      <!-- {{input value=model.project.name class=(concat "form-control " (if model.project.validations.attrs.name.isInvalid 'has-error')) id="nameInput" }} -->
+      {{#if  model.project.validations.attrs.name.isInvalid }} <!-- {{if modelIsInValid "has-error"}}-->
+        <span class="valid-input fa fa-check" style="color: green"></span>
+        <div class="error">
+          <p style="color: red; font-size:12px; margin:0;">{{model.project.validations.attrs.name.messages}}</p>
+        </div>
+      {{/if}}
     </div>
     <div class="form-group">
       <label for="locationInput">{{t 'product.basic.commonWords.address'}}</label>
       {{input value=model.project.location class="form-control" id="locationInput" }}
     </div>
-    <div class="form-group">
-      <label for="totalInput">{{t 'product.basic.commonWords.total'}}</label>
-      {{input value=model.project.total class="form-control" id="totalInput" }}
-    </div>
-    <div class="form-group">
+    <div class="form-group {{if model.project.validations.attrs.totalWithProfit.isInvalid "has-error"}}">
       <label for="totalWithProfitInput">{{t 'product.basic.commonWords.totalWithProfit'}}</label>
-      {{input value=model.project.totalWithProfit class="form-control" id="totalWithProfitInput" }}
+      {{input value=model.project.totalWithProfit class="form-control" id="totalWithProfitInput" type="number"}}
+      {{#if  model.project.validations.attrs.totalWithProfit.isInvalid }} <!-- {{if modelIsInValid "has-error"}}-->
+        <span class="valid-input fa fa-check" style="color: green"></span>
+        <div class="error">
+          <p style="color: red; font-size:12px; margin:0;">{{model.project.validations.attrs.totalWithProfit.messages}}</p>
+        </div>
+      {{/if}}
     </div>
 
     <button type="submit" class="btn btn-default">Adicionar</button>
     <button class="btn btn-default" {{action "cancel" model.project}}>Cancelar</button>
-    <!-- {{#link-to "company.projects"}}<button class="btn btn-default">Cancelar</button>{{/link-to}} -->
 </form>

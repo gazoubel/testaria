@@ -1,6 +1,18 @@
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  name: validator('presence', true),
+  totalWithProfit : [
+    validator('presence', true),
+    validator('number', {
+      allowString: true,
+      positive : true
+    })
+  ]
+});
+
+export default DS.Model.extend(Validations,{
   name: DS.attr('string'),
   location: DS.attr('string'),
   projectStages: DS.hasMany('project-stage',   {async: true}),
