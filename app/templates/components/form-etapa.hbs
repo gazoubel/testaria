@@ -1,13 +1,13 @@
 <form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
   <div class="row">
-    {{#mab-dropdown-label
-      hasError=projectStage.validations.attrs.stage.isInvalid
+    {{#az-dropdown-label
+      validation=projectStage.validations.attrs.stage
       options=stages
       selected=projectStage.stage
       displayText=(t 'product.basic.commonWords.stage')
       size="4" as |item|}}
       {{item.name}}
-    {{/mab-dropdown-label}}
+    {{/az-dropdown-label}}
   </div>
   <div class="row">
     {{mab-input-label field = projectStage.displayName displayText=(t 'product.basic.commonWords.name') size="12"}}

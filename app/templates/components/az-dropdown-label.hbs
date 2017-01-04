@@ -1,0 +1,16 @@
+<div class="col-sm-{{size}}">
+  <label>{{displayText}}</label>
+  {{#if validation.isInvalid}}
+    <label class="control-label">({{validation.message}})</label>
+    <!-- <span class="label label-danger">({{validation.message}})</span> -->
+  {{/if}}
+  {{#mab-dropdown
+    options=options
+    selected=selected
+    searchField = searchField
+    renderInPlace=true
+    onchange=(action (mut selected))
+    as |item|}}
+     {{yield item}}
+   {{/mab-dropdown}}
+</div>
