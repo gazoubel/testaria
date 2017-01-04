@@ -1,25 +1,26 @@
 <form  class="form-horizotal" role="form" {{action "save" projectStage project on="submit"}}> <!-- horizontal form -->
-  <!-- <div class="row"> -->
+  <div class="row">
     {{#az-dropdown-label
+      classNames="col-sm-5"
       validation=projectStage.validations.attrs.stage
       options=stages
       selected=projectStage.stage
-      displayText=(t 'product.basic.commonWords.stage')
-      size="4" as |item|}}
+      displayText=(t 'product.basic.commonWords.stage') as |item|}}
       {{item.name}}
     {{/az-dropdown-label}}
-  <!-- </div>
-  <div class="row"> -->
-    {{mab-input-label field = projectStage.displayName displayText=(t 'product.basic.commonWords.name') size="12"}}
-  <!-- </div>
-  <div class="row"> -->
-    {{mab-input-label field = projectStage.total displayText=(t 'product.basic.commonWords.total')
-      size="4" hasError=projectStage.validations.attrs.total.isInvalid}}
-    {{mab-input-date-label field = projectStage.startdate displayText=(t 'product.basic.commonWords.initialDate')
-      size="4" hasError=projectStage.validations.attrs.startdate.isInvalid}}
-    {{mab-input-date-label field = projectStage.enddate displayText=(t 'product.basic.commonWords.endDate')
-      size="4" hasError=projectStage.validations.attrs.enddate.isInvalid}}
-  <!-- </div> -->
+  </div>
+  <div class="row">
+    {{az-input-label field = projectStage.displayName displayText=(t 'product.basic.commonWords.name')
+     classNames="col-sm-12" validation=projectStage.validations.attrs.displayName}}
+  </div>
+  <div class="row">
+    {{az-input-label field = projectStage.total displayText=(t 'product.basic.commonWords.total')
+      classNames="col-sm-4" validation=projectStage.validations.attrs.total}}
+    {{az-input-date-label field = projectStage.startdate displayText=(t 'product.basic.commonWords.initialDate')
+       classNames="col-sm-4" validation=projectStage.validations.attrs.startdate}}
+    {{az-input-date-label field = projectStage.enddate displayText=(t 'product.basic.commonWords.endDate')
+       classNames="col-sm-4" validation=projectStage.validations.attrs.enddate}}
+  </div>
   <br/>
   <div class="form-group">
     <div class="pull-right" style="margin-top: 20px;">

@@ -18,6 +18,13 @@ const Validations = buildValidations({
 });
 
 export default DS.Model.extend(Validations,{
+  name: Ember.computed('displayName','stage','stage.name' , function(){
+    var displayName = this.get('displayName');
+    if (displayName && displayName!='') {
+      return displayName;
+    }
+    return this.get('stage.name');
+  }),
   displayName: DS.attr('string'),
   total: DS.attr('number'),
   startdate: DS.attr('date'),

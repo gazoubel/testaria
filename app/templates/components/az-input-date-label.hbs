@@ -1,0 +1,22 @@
+<div class="form-group {{if validation.isInvalid "has-error"}}">
+
+  <label>{{displayText}}</label>
+  {{#if validation.isInvalid}}
+    <label class="control-label">({{validation.message}})</label>
+  {{/if}}
+  <div class="input-group date">
+
+    {{mab-input-date id          = idInputElement
+                     showOnFocus = false
+                     autoclose   = true
+                     value       = field
+                     class       = "form-control mousetrap"
+                     disabled    = isDisabled
+                     autofocus   = autofocus
+                     action      = "keyDown" on="key-down"
+                     action      = "keyUp"   on="key-up"}}
+
+    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+
+  </div>
+</div>
