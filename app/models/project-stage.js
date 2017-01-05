@@ -13,8 +13,8 @@ const Validations = buildValidations({
       positive : true
     })
   ],
-  // startdate: validator('date'),
-  // enddate: validator('date')
+  startdate: validator('date'),
+  enddate: validator('date')
 });
 
 export default DS.Model.extend(Validations,{
