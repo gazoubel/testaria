@@ -12,20 +12,26 @@
         </div>
       </div>
     </div>
-    {{mab-input-label field = purchaseTransaction.description displayText=(t 'product.basic.commonWords.description') size="12"}}
+    {{az-input-label field = purchaseTransaction.description displayText=(t 'product.basic.commonWords.description')
+      classNames="col-sm-12" validation=purchaseTransaction.validations.attrs.description}}
 
-    {{mab-input-date-label field = purchaseTransaction.purchaseDate displayText=(t 'product.basic.commonWords.purchaseDate') size="4"}}
-    {{mab-input-date-label field = purchaseTransaction.purchasePlannedPaymentDate displayText=(t 'product.basic.commonWords.purchasePlannedPaymentDate') size="4"}}
-    {{#mab-dropdown-label
+    {{az-input-date-label field = purchaseTransaction.purchaseDate displayText=(t 'product.basic.commonWords.purchaseDate')
+      classNames="col-sm-4" validation=purchaseTransaction.validations.attrs.purchaseDate}}
+    {{az-input-date-label field = purchaseTransaction.purchasePlannedPaymentDate displayText=(t 'product.basic.commonWords.purchasePlannedPaymentDate')
+        classNames="col-sm-4" validation=purchaseTransaction.validations.attrs.purchasePlannedPaymentDate}}
+    {{#az-dropdown-label
+      classNames="col-sm-4"
+      validation=projectStage.validations.attrs.provider
       options=providers
       selected=purchaseTransaction.provider
-      searchField="name"
       onchange=(action (mut provider))
-      placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.provider')  size="4" displayText=(t 'product.basic.commonWords.provider')
+      placeholder = (t 'product.basic.commonWords.dropdownPlaceholder.provider')
+      displayText=(t 'product.basic.commonWords.provider')
       as |provider|}}
        {{provider.name}}
-     {{/mab-dropdown-label}}
-     {{mab-input-label field = purchaseTransaction.total displayText=(t 'product.basic.commonWords.total') size="4" numeric="true"}}
+     {{/az-dropdown-label}}
+     {{az-input-label field = purchaseTransaction.total displayText=(t 'product.basic.commonWords.total')
+       classNames="col-sm-4" validation=purchaseTransaction.validations.attrs.total numeric="true"}}
 
   </div>
 <section class="panel panel-default">

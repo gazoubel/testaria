@@ -1,6 +1,37 @@
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  description:validator('presence', true),
+  purchaseDate: validator('date'),
+  purchasePlannedPaymentDate: validator('date'),
+  total : [
+    validator('presence', true),
+    validator('number', {
+      allowString: true,
+      positive : true
+    })
+  ],
+  otherProjectStage: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  project: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  provider: validator('belongs-to'),
+  paymentDate: validator('date'),
+  expenseItems: [
+    validator('has-many')
+  ],
+  paymentType: [
+    validator('belongs-to')
+  ],
+});
+
+
+export default DS.Model.extend(Validations,{
   expenseItems: DS.hasMany('expense-item',   {async: true}),
   otherProjectStage: DS.belongsTo('project-stage',   {async: true}),
   project: DS.belongsTo('project',   {async: true}),

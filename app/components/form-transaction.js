@@ -62,8 +62,13 @@ export default Ember.Component.extend({
     // },
     save(purchaseTransaction){
       var ref = this;
-      var promises = new Array();
 
+      if (!purchaseTransaction.get('validations.isValid')) {
+        ref.get('appManager').notify('error', purchaseTransaction.get('validations.messages'));
+        return;
+      }
+
+      var promises = new Array();
       var paymentType = ref.get('purchaseTransaction.paymentType');
       if (paymentType.get('id')) {
         var payment = {};
@@ -72,11 +77,8 @@ export default Ember.Component.extend({
         });
         purchaseTransaction.set('paymentInfo', payment);
       } else {
-        // var payment = {};
         purchaseTransaction.set('paymentInfo', null);
       }
-
-
 
       purchaseTransaction.save().then(function(purchaseTransaction) {
           var providerPromisse = purchaseTransaction.get('provider').then(function(provider){
