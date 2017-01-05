@@ -11,6 +11,7 @@ export default Ember.Component.extend({
   providers: {},
   itemsRemoved: [],
   paymentTypes: null,
+  newItemValidationErrMsg:null,
   // itemSelection: null,
   paymentDataFields: {},
   payment: {},
@@ -159,14 +160,16 @@ export default Ember.Component.extend({
     },
     addNewItem(newItem, purchaseTransaction){
       var baseRef = this;
+      baseRef.set('newItemValidationErrMsg', null);
       var promisse = this.get('purchaseTransactionService').addNewItem(newItem, purchaseTransaction).then(function(){
         var emptyNewItem = {total:'', description:'', project: newItem.project};
         baseRef.set('newItem', emptyNewItem);
         baseRef.get('appManager').notify('success', 'Saved successfully!');
       });
-      promisse.catch(function() {
+      promisse.catch(function(validationErrMsg) {
+        baseRef.set('newItemValidationErrMsg', 'Error saving item');
         console.log("could not create");
-        baseRef.get('appManager').notify('error', 'Could not create!');
+        baseRef.get('appManager').notify('error', 'Could not create!'+validationErrMsg);
       });
     },
     removeItem(item, purchaseTransaction){

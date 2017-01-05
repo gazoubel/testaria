@@ -14,7 +14,13 @@ const Validations = buildValidations({
     })
   ],
   startdate: validator('date'),
-  enddate: validator('date')
+  enddate: validator('date'),
+  otherPurchaseTransactions: validator('has-many'),
+  expenseItems: validator('has-many'),
+  project: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
 });
 
 export default DS.Model.extend(Validations,{

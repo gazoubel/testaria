@@ -31,7 +31,7 @@
        {{provider.name}}
      {{/az-dropdown-label}}
      {{az-input-label field = purchaseTransaction.total displayText=(t 'product.basic.commonWords.total')
-       classNames="col-sm-4" validation=purchaseTransaction.validations.attrs.total numeric="true"}}
+       classNames="col-sm-4" validation=purchaseTransaction.validations.attrs.total numeric="true" scale="2"}}
 
   </div>
 <section class="panel panel-default">
@@ -85,15 +85,16 @@
             <div class="form-group">
                 <label class="sr-only" for="descriptionInput">Description</label>
                 {{input value=newItem.description class="form-control" id="descriptionInput" placeholder=(t 'product.basic.commonWords.description') }}
-          </div>
+            </div>
             <div class="form-group">
-              {{mab-input value=newItem.total class="form-control" id="totalInput" numeric="true" placeholder=(t 'product.basic.commonWords.total')}}
+              {{mab-input value=newItem.total class="form-control" id="totalInput" type = "text" scale = "2" numeric="true" placeholder=(t 'product.basic.commonWords.total')}}
             </div>
             <button class="btn btn-default" {{action "addNewItem" newItem purchaseTransaction}}>{{t 'product.basic.buttonText.add'}}</button>
-          <!-- <div class="form-group">
-            <div class="col-xs-12 col-sm-2">
+            {{#if newItemValidationErrMsg}}
+            <div class="form-group has-error">
+              <label class="control-label">({{newItemValidationErrMsg}})</label>
             </div>
-          </div> -->
+            {{/if}}
         </div>
           <!-- <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button> -->
         </form>

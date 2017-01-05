@@ -7,15 +7,6 @@ export default Ember.Service.extend({
   },
   addNewItem(newItem, purchaseTransaction){
     var expenseItem = this.get('store').createRecord('expense-item');
-    // var project = newItem.project;
-    // expenseItem.set('total', newItem.total);
-    // expenseItem.set('description', newItem.description);
-    // expenseItem.set('itemType', newItem.itemType);
-    // expenseItem.set('dateAdded', new Date());
-    // expenseItem.set('purchaseTransaction', purchaseTransaction);
-    // purchaseTransaction.get('expenseItems').addObject(expenseItem);
-    // project.get('expenseItems').addObject(expenseItem);
-    // newItem.itemType.get('expenseItems').addObject(expenseItem);
     var promise = new Promise(function(resolve, reject) {
       expenseItem.set('total', newItem.total);
       expenseItem.set('description', newItem.description);
@@ -24,14 +15,20 @@ export default Ember.Service.extend({
       expenseItem.set('project', newItem.project);
       expenseItem.set('projectStage', newItem.projectStage);
       expenseItem.set('purchaseTransaction', purchaseTransaction);
+
+      if (!expenseItem.get('validations.isValid')) {
+        // var reason = expenseItem.get('validations.messages');
+        purchaseTransaction.get('expenseItems').removeObject(expenseItem);
+        reject( expenseItem.get('validations.messages'));
+        expenseItem.deleteRecord();
+        return;
+      }
+
       purchaseTransaction.get('expenseItems').addObject(expenseItem);
       newItem.project.get('expenseItems').addObject(expenseItem);
       newItem.itemType.get('expenseItems').addObject(expenseItem);
       newItem.projectStage.get('expenseItems').addObject(expenseItem);
       resolve(newItem);
-
-      // on failure
-      // reject(reason);
     });
     return promise;
   },
@@ -47,9 +44,6 @@ export default Ember.Service.extend({
       });
       item.destroyRecord();
       resolve();
-
-      // on failure
-      // reject(reason);
     });
     return promise;
   },

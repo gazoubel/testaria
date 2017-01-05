@@ -4,6 +4,7 @@ import config from '../config/environment';
 
 export default Ember.Route.extend({
   intl: Ember.inject.service(),
+  moment: Ember.inject.service(),
   email: '',
   password: '',
 
@@ -28,19 +29,28 @@ export default Ember.Route.extend({
         return null;
       });
     // return initalRef;
+      this.get('moment').changeLocale(config.APP.language);
+      this.set('moment.defaultFormat', config.APP.dateFormat);
     return Ember.RSVP.hash({
       baseInfo: initalRef,
+      intl: this.get('intl').setLocale(config.APP.language),
       // routerApp: routerApp,
       // intl: this.get('intl').setLocale('en-us'),
       // companyApp: initalRef,
     });
   },
   beforeModel: function() {
+    // this.get('moment').changeLocale(config.APP.language);
+    // this.set('moment.defaultFormat', config.APP.dateFormat);
     return Ember.RSVP.hash({
       session: this.get("session").fetch().catch(function() {}),
-      // intl: this.get('intl').setLocale('en-us'),
-      intl: this.get('intl').setLocale('pt-BR'),
+      // intl: this.get('intl').setLocale(config.APP.language),
     });
+    // return Ember.RSVP.hash({
+    //   session: this.get("session").fetch().catch(function() {}),
+    //   // intl: this.get('intl').setLocale('en-us'),
+    //   intl: this.get('intl').setLocale('pt-BR'),
+    // });
   },
   actions: {
     doSignIn: function(email, password) {

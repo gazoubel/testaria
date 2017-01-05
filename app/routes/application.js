@@ -3,8 +3,8 @@ import Firebase from 'firebase';
 import config from '../config/environment';
 
 export default Ember.Route.extend({
-  intl: Ember.inject.service(),
-  moment: Ember.inject.service(),
+  // intl: Ember.inject.service(),
+  // moment: Ember.inject.service(),
   email: '',
   password: '',
   notifications: null,
@@ -33,12 +33,12 @@ export default Ember.Route.extend({
     // });
   },
   beforeModel: function() {
-    this.get('moment').changeLocale(config.APP.language);
-    this.set('moment.defaultFormat', config.APP.dateFormat);
-    return Ember.RSVP.hash({
-      session: this.get("session").fetch().catch(function() {}),
-      intl: this.get('intl').setLocale(config.APP.language),
-    });
+    // this.get('moment').changeLocale(config.APP.language);
+    // this.set('moment.defaultFormat', config.APP.dateFormat);
+    // return Ember.RSVP.hash({
+    //   session: this.get("session").fetch().catch(function() {}),
+    //   intl: this.get('intl').setLocale(config.APP.language),
+    // });
   },
   actions: {
     createUser: function(email, password,nome, company) {

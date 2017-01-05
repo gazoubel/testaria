@@ -1,6 +1,32 @@
 import DS from 'ember-data';
+import { validator, buildValidations } from 'ember-cp-validations';
 
-export default DS.Model.extend({
+const Validations = buildValidations({
+  projectStage: [
+    validator('presence', true),
+    validator('belongs-to')
+  ],
+  project: [
+      validator('presence', true),
+      validator('belongs-to')
+  ],
+  itemType: [
+      validator('presence', true),
+      validator('belongs-to')
+  ],
+  total : [
+    validator('presence', true),
+    validator('number', {
+      allowString: true,
+      positive : true
+    })
+  ],
+  dateAdded: validator('date'),
+  description: validator('presence', true),
+});
+
+
+export default DS.Model.extend(Validations,{
   total: DS.attr('number'),
   description: DS.attr('string'),
   // stage: DS.belongsTo('project-stage',   {async: true}),

@@ -32,6 +32,7 @@ module.exports = function(environment) {
       dateFormat:        'dd/mm/yyyy',
       decimalSeparator:  '.',
       thousandSeparator: ',',
+      // language:          'en-us',
       language:          'pt-BR',
     }
   };

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import config from '../config/environment';
 
 export default Ember.TextField.extend({
 
@@ -26,7 +27,7 @@ export default Ember.TextField.extend({
   },
 
   numericInvalidKeyPressed: function(charPressed,newValue) {
-    var ds    = this.appManager.get('decimalSeparator');
+    var ds    = config.APP.decimalSeparator;
     var arr   = newValue.split(ds);
     var scale = this.get('scale');
     if (['0','1','2','3','4','5','6','7','8','9', ds].
