@@ -16,8 +16,8 @@
       <td>{{if projectStage.displayName projectStage.displayName projectStage.stage.name }}</td>
       <td>{{format-date projectStage.startdate localeMatcher='best fit'}}</td>
       <td>{{format-date projectStage.enddate localeMatcher='best fit'}}</td>
-      <td>{{format-number projectStage.total style='currency' currency='BRL' fallback='nothing'}}</td>
-      <td>{{format-number projectStage.totalSpent style='currency' currency='BRL' fallback='nothing'}}</td>
+      <td>{{format-currency projectStage.total fallback='nothing'}}</td>
+      <td>{{format-currency  projectStage.totalSpent fallback='nothing'}}</td>
       <td>
         {{#unless projectStage.totalSpent}}
           <button class="btn btn-default" {{action "remove" projectStage}}>{{t 'product.basic.buttonText.delete'}}</button>

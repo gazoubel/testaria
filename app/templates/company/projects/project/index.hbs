@@ -1,6 +1,6 @@
 <h3>{{t 'product.basic.commonWords.location'}}: {{model.location}}</h3>
-<h3>{{t 'product.basic.commonWords.totalBudgeted'}}: {{format-number model.total style='currency' currency='BRL' fallback='nothing'}}</h3>
+<h3>{{t 'product.basic.commonWords.totalBudgeted'}}: {{format-currency model.total fallback='nothing'}}</h3>
 {{#if model.totalWithProfit}}
-<h3>{{t 'product.basic.commonWords.totalWithProfit'}}: {{format-number model.totalWithProfit style='currency' currency='BRL' fallback='nothing'}}</h3>
+<h3>{{t 'product.basic.commonWords.totalWithProfit'}}: {{format-currency model.totalWithProfit fallback='nothing'}}</h3>
 {{/if}}
-<h3>{{t 'product.basic.commonWords.totalSpent'}}: {{format-number model.totalSpent style='currency' currency='BRL' fallback='nothing'}}</h3>
+<h3>{{t 'product.basic.commonWords.totalSpent'}}: {{format-currency model.totalSpent fallback='nothing'}}</h3>

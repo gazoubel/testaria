@@ -1,4 +1,4 @@
-<div class="container-fluid">  
+<div class="container-fluid">
   <div class="row">
     {{#link-to "company.projects.project.transactions.new"}}<button class="btn btn-default">{{t 'product.basic.commonWords.newTransaction'}}</button>{{/link-to}}
     <div class="btn-group pull-right" role="group">
@@ -23,7 +23,7 @@
           <tr>
             <td>{{transaction.description}}</td>
             <td>{{transaction.numberOfItems}}</td>
-            <td>{{format-number transaction.total style='currency' currency='BRL' fallback='nothing'}}</td>
+            <td>{{format-currency transaction.total fallback='nothing'}}</td>
             <td>
               {{#link-to "company.projects.project.transactions.transaction.edit" transaction.id}}
                 <button class="btn btn-default">{{t 'product.basic.buttonText.edit'}}</button>

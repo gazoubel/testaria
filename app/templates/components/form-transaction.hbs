@@ -112,7 +112,7 @@
               {{#each purchaseTransaction.expenseItems as |item|}}
               <tr>
                 <td>{{item.description}}</td>
-                <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
+                <td>{{format-currency item.total fallback='nothing'}}</td>
                 <td>{{if item.projectStage item.projectStage.name 'N/A'}}</td>
                 <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
                 <td><button class="btn btn-default" {{action "removeItem" item purchaseTransaction}}>{{t 'product.basic.buttonText.delete'}}</button></td>
@@ -122,7 +122,7 @@
           <tfoot>
             <tr>
               <th>Other</th>
-              <th>{{format-number purchaseTransaction.other style='currency' currency='BRL' fallback='nothing'}}</th>
+              <th>{{format-currency purchaseTransaction.other fallback='nothing'}}</th>
               <th>
                 {{#if purchaseTransaction.project}}
                   <div class="form-group">

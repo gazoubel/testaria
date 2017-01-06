@@ -1,14 +1,120 @@
 product:
   menu:
-    basic: 'Items'
-    composition: 'Compositions'
-    projects: 'Projects'
-    administration: 'Administration'
-    search: 'Search'
+    basic: 'Insumos'
+    composition: 'Composto'
+    projects: 'Projetos'
+    administration: 'Administracao'
+    search: 'Procurar'
+    signOut: 'Sair'
+    loggedInText: 'Logado como'
   administration:
-    units: 'Units'
-    stages: 'Stages'
-  info: '{product} will cost {price, number, USD} if ordered by {deadline, date, time}'
-  title: 'Hello world!'
+    menu:
+      units: 'Unidades'
+      stages: 'Etapas'
+      users: 'Usuarios'
+      providers: 'Fornecedores'
+      itemTypes: 'Classificacao de Itens'
+      paymentTypes: 'Formas de Pagamento'
+    stages:
+      title: 'Etapas'
+    units:
+      title: 'Unidades'
+    providers:
+      title: 'Fornecedores'
+    itemTypes:
+      title: 'Classificacao de Itens'
+    users:
+      title: 'Usuarios'
+    paymentTypes:
+      title: 'Formas de Pagamento'
+      editTitle: 'Forma de Pagamento'
+  projects:
+    title: 'Projetos'
+    newProject: 'Novo Projeto'
+    menu:
+      generalInformation: 'Informacoes Gerais'
+      stages: 'Etapas'
+      execution: 'Execucao'
+      transactions: 'Transacoes'
+    execution:
+      dropdownPlaceholder: 'Tipo'
+  basic:
+    buttonText:
+      add: 'Adicionar'
+      delete: 'Remover'
+      edit: 'Alterar'
+      cancel: 'Cancelar'
+      save: 'Salvar'
+      view: 'Ver'
+      details: 'Detalhes'
+    commonWords:
+      name: 'Nome'
+      description: 'Descricao'
+      acronym: 'Sigla'
+      units: 'Unidades'
+      stages: 'Etapas'
+      stage: 'Etapa'
+      location: 'Local'
+      total: 'Total'
+      project: 'Projeto'
+      initialDate: 'Data Inicio'
+      endDate: 'Data Fim'
+      totalBudgeted: 'Total Orcado'
+      totalSpent: 'Total Gasto'
+      newStage: 'Nova Etapa'
+      editStage: 'Alterar Etapa'
+      select: 'Selecione...'
+      email: 'email'
+      role: 'Privilegio'
+      itemType: 'Tipo'
+      address: 'Endereco'
+      totalWithProfit: 'Total com lucro'
+      numberOfItems: 'Qtd de itens'
+      newTransaction: 'Nova transacao'
+      editTransaction: 'Editar transacao'
+      purchaseDate: 'Data da compra'
+      purchasePlannedPaymentDate: 'Data planejada para pagamento'
+      purchaseItems: 'Items'
+      purchasePaymentInfo: 'Pagamento'
+      provider: 'Fornecedor'
+      dropdownPlaceholder:
+        tipo: 'Tipo'
+        project: 'Projeto'
+        provider: 'Fornecedor'
+        projectStage: 'Etapa'
+        paymentType: 'Forma de Pagamento'
   html:
     info: '<strong>{product}</strong> will cost <em>{price, number, USD}</em> if ordered by {deadline, date, time}'
+errors:
+  description: "This field"
+  inclusion: "{description} is not included in the list"
+  exclusion: "{description} is reserved"
+  invalid: "{description} is invalid"
+  confirmation: "{description} doesn't match {on}"
+  accepted: "{description} must be accepted"
+  empty: "{description} can't be empty"
+  blank: "{description} can't be blank"
+  present: "{description} must be blank"
+  collection: "{description} must be a collection"
+  singular: "{description} can't be a collection"
+  tooLong: "{description} is too long (maximum is {max} characters)"
+  tooShort: "{description} is too short (minimum is {min} characters)"
+  before: "{description} must be before {before}"
+  after: "{description} must be after {after}"
+  wrongDateFormat: "{description} must be in the format of {format}"
+  wrongLength: "{description} is the wrong length (should be {is} characters)"
+  notANumber: "{description} must be a number"
+  notAnInteger: "{description} must be an integer"
+  greaterThan: "{description} must be greater than {gt}"
+  greaterThanOrEqualTo: "{description} must be greater than or equal to {gte}"
+  equalTo: "{description} must be equal to {is}"
+  lessThan: "{description} must be less than {lt}"
+  lessThanOrEqualTo: "{description} must be less than or equal to {lte}"
+  otherThan: "{description} must be other than {value}"
+  odd: "{description} must be odd"
+  even: "{description} must be even"
+  positive: "{description} must be positive"
+  date: "{description} must be a valid date"
+  email: "{description} must be a valid email address"
+  phone: "{description} must be a valid phone number"
+  url: "{description} must be a valid url"

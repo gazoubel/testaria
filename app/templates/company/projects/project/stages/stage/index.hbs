@@ -13,14 +13,14 @@
     {{#if model.projectStage.totalSpentInOther}}
     <tr>
       <td>Other</td>
-      <td>{{format-number model.projectStage.totalSpentInOther style='currency' currency='BRL' fallback=''}}</td>
+      <td>{{format-currency model.projectStage.totalSpentInOther fallback='nothing'}}</td>
       <td></td>
       <td></td>
     </tr>
     {{/if}}
     <tr>
       <td>{{t 'product.basic.commonWords.total'}}</td>
-      <td>{{format-number model.projectStage.totalSpent style='currency' currency='BRL' fallback=''}}</td>
+      <td>{{format-currency model.projectStage.totalSpent fallback='nothing'}}</td>
       <td></td>
       <td></td>
     </tr>
@@ -29,7 +29,7 @@
       {{#each model.projectStage.expenseItems as |item|}}
       <tr>
         <td>{{item.description}}</td>
-        <td>{{format-number item.total style='currency' currency='BRL' fallback='nothing'}}</td>
+        <td>{{format-currency item.total fallback='nothing'}}</td>
         <td>{{if item.itemType item.itemType.name 'N/A'}}</td>
         </tr>
       {{/each}}
