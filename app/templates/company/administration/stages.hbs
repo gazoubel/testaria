@@ -1,11 +1,11 @@
 <h1>Etapas</h1>
-<form class="form-inline pull-right" role="form" {{action "addStage" name on="submit"}}> <!-- horizontal form -->
-    <div class="form-group {{if modelIsInValid "has-error"}}">
-      <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
-      {{input value=name class="form-control" id="nameInput" }}
-    </div>
-    <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
-</form>
+{{#show-on-add-form  modelIsInValid=modelIsInValid
+    onCloseClicked="closeAddPanel" onAddClicked="addStage" itemAdded="name" }}
+  <div class="form-group {{if modelIsInValid "has-error"}}">
+    <label for="nameInput">{{t 'product.basic.commonWords.name'}}</label>
+    {{input value=name class="form-control" id="nameInput" }}
+  </div>
+{{/show-on-add-form}}
 <table class="table table-striped">
   <thead>
     <tr>

@@ -1,0 +1,16 @@
+{{#if isAdding}}
+<div class="panel {{if modelIsInValid "panel-danger" "panel-default"}} ">
+  {{#if modelIsInValid}}
+  <div class="panel-heading">Error</div>
+  {{/if}}
+  <div class="panel-body">
+    <form class="{{formCss}}" role="form" {{action "addClicked" on="submit"}}>
+        {{yield}}
+        <button type="submit" class="btn btn-default">{{t 'product.basic.buttonText.add'}}</button>
+        <button class="btn btn-default"  {{action "closeClicked"}}>{{t 'product.basic.buttonText.cancel'}}</button>
+    </form>
+  </div>
+</div>
+{{else}}
+  <button class="btn btn-default"  {{action "openAddPanel" bubbles=false}}>{{t 'product.basic.buttonText.add'}}</button>
+{{/if}}
